@@ -1,0 +1,1201 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>股海风云茶话会 日报 - 2024年06月05日</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f7f6;
+            color: #333;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        header {
+            text-align: center;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #667eea;
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        .report-type {
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #667eea;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 15px;
+            font-size: 0.9em;
+            font-weight: bold;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        header h1 {
+            font-size: 2.2em;
+            color: #3f51b5; /* Indigo */
+            margin-bottom: 5px;
+        }
+
+        header .date {
+            font-size: 1.1em;
+            color: #555;
+            margin-bottom: 15px;
+        }
+
+        .meta-info {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            background-color: #e8eaf6; /* Light Indigo */
+            padding: 10px;
+            border-radius: 6px;
+            font-size: 0.95em;
+        }
+
+        .meta-info-item {
+            display: flex;
+            align-items: center;
+            color: #3f51b5;
+        }
+        .meta-info-item .meta-icon {
+            font-size: 1.2em;
+            margin-right: 8px;
+        }
+        .meta-info-item strong {
+            color: #2c387e; /* Darker Indigo */
+        }
+
+        h2 {
+            font-size: 1.8em;
+            color: #764ba2; /* Purple */
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+            margin-top: 40px;
+            margin-bottom: 20px;
+        }
+        
+        h3 {
+            font-size: 1.4em;
+            color: #5c6bc0; /* Indigo Light */
+            margin-bottom: 10px;
+        }
+        
+        h4 {
+            font-size: 1.1em;
+            color: #455a64; /* Blue Grey */
+            margin-bottom: 5px;
+        }
+
+        .card-grid {
+            display: grid;
+            gap: 20px;
+        }
+
+        .card-grid-1 { grid-template-columns: 1fr; }
+        .card-grid-2 { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+        .card-grid-3 { grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); }
+
+
+        .card {
+            background-color: #ffffff;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 0.3em 0.8em;
+            font-size: 0.8em;
+            font-weight: 600;
+            border-radius: 12px;
+            margin-right: 5px;
+            margin-bottom: 10px;
+        }
+
+        .badge-primary { background-color: #667eea; color: white; }
+        .badge-secondary { background-color: #78909c; color: white; } /* Blue Grey */
+        .badge-info { background-color: #26c6da; color: white; } /* Cyan */
+        .priority-high { background-color: #ef5350; color: white; } /* Red */
+        .priority-medium { background-color: #ff9800; color: white; } /* Orange */
+
+        .topic-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .topic-card-header h3 {
+            margin: 0;
+            color: #3f51b5;
+        }
+
+        .topic-heat {
+            display: flex;
+            align-items: center;
+            font-size: 1.1em;
+            color: #ff7043; /* Deep Orange */
+        }
+        .topic-heat span {
+            margin-left: 5px;
+            font-weight: bold;
+        }
+        
+        .topic-summary, .tutorial-summary, .message-content p, .answer-content p {
+            color: #555;
+            font-size: 0.95em;
+            margin-bottom: 15px;
+        }
+
+        .deep-comment {
+            background-color: #f9f9f9;
+            border-left: 4px solid #764ba2;
+            padding: 10px 15px;
+            margin-top: 15px;
+            margin-bottom: 15px;
+            border-radius: 4px;
+        }
+        .comment-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 5px;
+        }
+        .comment-icon {
+            font-size: 1.2em;
+            color: #764ba2;
+            margin-right: 8px;
+        }
+        .comment-label {
+            font-weight: bold;
+            color: #764ba2;
+        }
+        .comment-text {
+            font-style: italic;
+            color: #4a4a4a;
+            font-size: 0.95em;
+            line-height: 1.5;
+        }
+
+        .topic-keywords .keyword {
+            display: inline-block;
+            background-color: #e0e0e0;
+            color: #555;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 0.8em;
+            margin-right: 5px;
+            margin-bottom: 5px;
+        }
+
+        .topic-stats {
+            margin-top: 15px;
+            font-size: 0.85em;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        .topic-stats .badge { margin-bottom: 0; }
+        
+        .tutorial-meta {
+            font-size: 0.85em;
+            color: #777;
+            margin-bottom: 10px;
+        }
+        .tutorial-meta span { margin-right: 10px; }
+        
+        .key-points ul {
+            list-style-type: "✓ ";
+            padding-left: 20px;
+            font-size: 0.9em;
+            color: #555;
+        }
+        .key-points h4 {
+            font-size: 1em;
+            color: #3f51b5;
+            margin-bottom: 5px;
+        }
+
+        .tutorial-link a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .tutorial-link a:hover { text-decoration: underline; }
+
+        .message-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 10px;
+        }
+        .message-time {
+            font-size: 0.85em;
+            color: #777;
+        }
+        .message-sender {
+            font-size: 0.9em;
+            color: #555;
+            margin-bottom: 8px;
+        }
+
+        .dialogue-content {
+            margin-bottom: 15px;
+        }
+        .dialogue-bubble {
+            padding: 10px 15px;
+            border-radius: 15px;
+            margin-bottom: 10px;
+            max-width: 80%;
+            word-wrap: break-word;
+        }
+        .dialogue-bubble.left {
+            background-color: #e8eaf6; /* Light Indigo */
+            margin-right: auto;
+            border-bottom-left-radius: 3px;
+        }
+        .dialogue-bubble.right {
+            background-color: #c5cae9; /* Indigo lighter */
+            margin-left: auto;
+            border-bottom-right-radius: 3px;
+            text-align: right;
+        }
+        .dialogue-speaker {
+            font-weight: bold;
+            font-size: 0.9em;
+            color: #3f51b5;
+            margin-bottom: 3px;
+        }
+        .dialogue-bubble p { margin: 0; font-size: 0.95em; }
+
+        .dialogue-highlight {
+            background-color: #fff9c4; /* Light Yellow */
+            border-left: 4px solid #fdd835; /* Yellow */
+            padding: 10px;
+            font-style: italic;
+            font-size: 0.95em;
+            color: #5f4c00;
+            border-radius: 4px;
+        }
+        
+        .question { margin-bottom: 15px; }
+        .question-header, .answer-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 5px;
+        }
+        .question-time, .answer-time { font-size: 0.85em; color: #777; }
+        .question-asker, .answer-responder { font-size: 0.9em; color: #555; margin-bottom: 8px; }
+        .question-tags .tag {
+            display: inline-block;
+            background-color: #eee;
+            color: #555;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 0.8em;
+            margin-right: 5px;
+        }
+        .answers .answer {
+            border-top: 1px dashed #ddd;
+            padding-top: 15px;
+        }
+        
+        .analytics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+        .stat-card {
+            background-color: #f0f4f8; /* Light blue-grey */
+            padding: 15px;
+            border-radius: 6px;
+            text-align: center;
+            border: 1px solid #d6dde4;
+        }
+        .stat-label { font-size: 0.9em; color: #546e7a; /* Blue Grey Darker */ margin-bottom: 5px; }
+        .stat-number { font-size: 1.8em; font-weight: bold; color: #3f51b5; }
+        .stat-change { font-size: 0.8em; color: #4caf50; /* Green */ }
+        .stat-card .stat-change.negative { color: #f44336; /* Red */ }
+
+        .heat-distribution .heat-item {
+            margin-bottom: 15px;
+        }
+        .heat-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 5px;
+            font-size: 0.95em;
+        }
+        .heat-topic { font-weight: 500; color: #455a64; }
+        .heat-percentage { font-weight: bold; color: #3f51b5; }
+        .heat-bar {
+            height: 12px;
+            background-color: #e0e0e0;
+            border-radius: 6px;
+            overflow: hidden;
+        }
+        .heat-fill {
+            height: 100%;
+            border-radius: 6px;
+        }
+        .heat-stats {
+            font-size: 0.8em;
+            color: #777;
+            margin-top: 5px;
+        }
+        
+        .participants-ranking .participant-card {
+            display: flex;
+            align-items: center;
+            background-color: #fafafa;
+            padding: 15px;
+            border-radius: 6px;
+            margin-bottom: 10px;
+            border: 1px solid #eee;
+        }
+        .participant-rank {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #fff;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+        .rank-1 { background-color: #ffd700; color: #5f4c00;} /* Gold */
+        .rank-2 { background-color: #c0c0c0; color: #4f4f4f;} /* Silver */
+        .rank-3 { background-color: #cd7f32; color: #fff;} /* Bronze */
+        .participant-info { flex-grow: 1; }
+        .participant-name { font-weight: bold; font-size: 1.1em; color: #3f51b5; margin-bottom: 3px; }
+        .participant-stats { font-size: 0.85em; color: #555; margin-bottom: 5px; }
+        .participant-stats span { margin-right: 10px; }
+        .participant-traits .badge { font-size: 0.75em; }
+
+        .time-activity .time-chart {
+            display: flex;
+            flex-wrap: wrap; /* Allow wrapping for smaller screens */
+            justify-content: space-between;
+            gap: 5px; /* Add gap between slots */
+        }
+        .time-slot {
+            flex: 1 1 calc(100%/12 - 10px); /* Adjust for 12 slots per row, considering gaps */
+            min-width: 60px; /* Minimum width for readability */
+            padding: 10px 5px;
+            text-align: center;
+            border-radius: 4px;
+            margin-bottom: 5px; /* Add margin for rows */
+            transition: background-color 0.3s ease;
+        }
+        .time-slot:hover {
+             filter: brightness(110%);
+        }
+        .time-hour { font-size: 0.8em; font-weight: bold; color: #303f9f; /* Indigo Dark */ }
+        .time-count { font-size: 1em; color: #5c6bc0; }
+
+        .night-owl-card {
+            background: linear-gradient(135deg, #1f2a40 0%, #303f9f 100%); /* Dark Blue gradient */
+            color: white;
+            padding: 25px;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+        .owl-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .owl-crown {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        .owl-info h4 {
+            font-size: 1.5em;
+            color: #e8eaf6; /* Light Indigo for contrast */
+            margin-bottom: 5px;
+        }
+        .owl-title {
+            font-size: 1em;
+            font-style: italic;
+            color: #c5cae9; /* Lighter Indigo */
+            margin-bottom: 15px;
+        }
+        .owl-stats {
+            font-size: 0.9em;
+            color: #9fa8da; /* Even Lighter Indigo */
+            margin-bottom: 15px;
+        }
+        .owl-stats span { margin: 0 10px; }
+        .owl-quote {
+            font-size: 0.95em;
+            color: #e8eaf6;
+            border-top: 1px dashed #7986cb;
+            padding-top: 10px;
+            max-width: 80%;
+            margin: 0 auto;
+        }
+
+        .word-cloud {
+            text-align: center;
+        }
+        .cloud-container {
+            position: relative;
+            width: 100%;
+            height: 350px; /* Adjust as needed */
+            perspective: 1000px;
+            margin: 20px 0;
+            overflow: hidden; /* Hide words outside bounds */
+        }
+        .cloud-3d {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 100%; /* Ensure it spans */
+            height: 100%; /* Ensure it spans */
+            transform-style: preserve-3d;
+            animation: rotateCloud 40s linear infinite;
+        }
+        .cloud-layer { /* Use this if you want multiple layers, or just put words in cloud-3d */
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            transform-style: preserve-3d;
+        }
+        .cloud-word {
+            position: absolute;
+            padding: 5px 10px;
+            border-radius: 5px;
+            background-color: rgba(255, 255, 255, 0.1);
+            cursor: default;
+            user-select: none;
+            /* Dynamic styles (left, top, font-size, color, transform) will be set inline */
+        }
+        @keyframes rotateCloud {
+            0% { transform: translate(-50%, -50%) rotateY(0deg) rotateX(0deg); }
+            100% { transform: translate(-50%, -50%) rotateY(360deg) rotateX(10deg); }
+        }
+        .cloud-legend {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        .legend-item {
+            display: flex;
+            align-items: center;
+            font-size: 0.9em;
+        }
+        .legend-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-right: 5px;
+        }
+
+        .summary ul {
+            list-style-type: "⭐ ";
+            padding-left: 20px;
+        }
+        .summary ul li { margin-bottom: 8px; }
+        
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+            font-size: 0.85em;
+            color: #777;
+        }
+        .footer-info span { margin: 0 10px; }
+        .disclaimer { margin-top: 10px; font-style: italic; }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- 头部信息 -->
+        <header>
+            <div class="report-type">日报</div>
+            <h1>股海风云茶话会 群聊日报</h1>
+            <p class="date">2024年06月05日</p>
+            <div class="meta-info">
+                <div class="meta-info-item">
+                    <span class="meta-icon">💬</span>
+                    <span>总消息数：<strong>715</strong></span>
+                </div>
+                <div class="meta-info-item">
+                    <span class="meta-icon">👥</span>
+                    <span>活跃用户：<strong>40</strong></span>
+                </div>
+                <div class="meta-info-item">
+                    <span class="meta-icon">⏱️</span>
+                    <span>统计周期：<strong>2024年06月05日</strong></span>
+                </div>
+            </div>
+        </header>
+
+        <!-- 1. 讨论热点 -->
+        <section class="hot-topics">
+            <h2>📊 2024年06月05日讨论热点</h2>
+            <div class="card-grid card-grid-2">
+                <div class="card topic-card">
+                    <div class="topic-card-header">
+                        <h3>股市“天象”与实战</h3>
+                        <div class="topic-heat">
+                            🔥 <span>95</span>
+                        </div>
+                    </div>
+                    <span class="badge badge-primary">金融投资</span>
+                    <p class="topic-summary">群内核心人物“发财童子”继续以其“天象观测”预测A股走势，从开盘预言暴涨，到盘中点评板块（证券、银行、科技），并给出具体代码（000651 格力）。群友们围绕其预测展开讨论，既有跟风也有质疑，共同见证了市场的波动与“天象”的（不）准确性。全天充斥着对大盘点位、成交量、资金流向的关注与解读。</p>
+                    <div class="deep-comment">
+                        <div class="comment-header">
+                            <span class="comment-icon">🎯</span>
+                            <span class="comment-label">评论</span>
+                        </div>
+                        <div class="comment-content">
+                            <p class="comment-text">他们试图用星盘丈量股市的深度，却忘了星盘本身也是漂浮在欲望海洋上的泡沫，偶尔能映出些许真实的倒影，但更多时候只是自娱自乐的光斑。</p>
+                        </div>
+                    </div>
+                    <div class="topic-keywords">
+                        <span class="keyword">#A股预测</span>
+                        <span class="keyword">#天象观测</span>
+                        <span class="keyword">#板块轮动</span>
+                    </div>
+                    <div class="topic-stats">
+                        <span class="badge badge-info">💬 250+条讨论</span>
+                        <span class="badge badge-info">👥 20+人参与</span>
+                        <span class="badge badge-info">🕐 贯穿全天</span>
+                    </div>
+                </div>
+
+                <div class="card topic-card">
+                    <div class="topic-card-header">
+                        <h3>舌尖上的群聊：南北美食大赏</h3>
+                        <div class="topic-heat">
+                            🔥 <span>88</span>
+                        </div>
+                    </div>
+                    <span class="badge badge-primary">生活美食</span>
+                    <p class="topic-summary">从“发财童子”背叛“糖火烧”吃麦麦开始，群内掀起了一场美食讨论热潮。羊肉泡馍、小炒、山西油饼、河南西瓜酱、鸡蛋布袋、河北馃子、永年驴肠、二毛烧鸡、乃至各种方便面（豫竹、蟹黄面）轮番登场。群友们不仅分享美食图片，还热烈讨论各地特色小吃的做法、口味及购买渠道，乡情与食欲交织。</p>
+                    <div class="deep-comment">
+                        <div class="comment-header">
+                            <span class="comment-icon">🎯</span>
+                            <span class="comment-label">评论</span>
+                        </div>
+                        <div class="comment-content">
+                            <p class="comment-text">胃是离心最近的器官，所以当现实的骨感硌得人生疼时，人们总不自觉地用食物的丰腴去填充精神的空虚，仿佛每一口热量都能暂时抵御世界的寒凉。</p>
+                        </div>
+                    </div>
+                    <div class="topic-keywords">
+                        <span class="keyword">#地方小吃</span>
+                        <span class="keyword">#美食分享</span>
+                        <span class="keyword">#饮食文化</span>
+                    </div>
+                    <div class="topic-stats">
+                        <span class="badge badge-info">💬 150+条讨论</span>
+                        <span class="badge badge-info">👥 15+人参与</span>
+                        <span class="badge badge-info">🕐 11:30-16:30</span>
+                    </div>
+                </div>
+
+                <div class="card topic-card">
+                    <div class="topic-card-header">
+                        <h3>经济寒流下的众生相</h3>
+                        <div class="topic-heat">
+                            🔥 <span>75</span>
+                        </div>
+                    </div>
+                    <span class="badge badge-primary">社会观察</span>
+                    <p class="topic-summary">花旗银行IT业务解散并提供N+6至N+10赔偿的消息引发热议，对比国内企业裁员补偿，群友感慨“还得是国外资本”。此外，养娃成本高昂、房贷利率与贷款意愿、就业难（滴滴/外卖/直播）等现实问题也成为讨论焦点。群友们在调侃与无奈中，勾勒出当前经济环境下普通人的生存焦虑与应对。</p>
+                    <div class="deep-comment">
+                        <div class="comment-header">
+                            <span class="comment-icon">🎯</span>
+                            <span class="comment-label">评论</span>
+                        </div>
+                        <div class="comment-content">
+                            <p class="comment-text">当时代的快车呼啸减速，一些人被甩下车厢，庆幸的是还能捡到几块散落的碎银；另一些人则在车厢里疯狂踩踏，以为这样就能让车再次加速。</p>
+                        </div>
+                    </div>
+                    <div class="topic-keywords">
+                        <span class="keyword">#裁员赔偿</span>
+                        <span class="keyword">#养育成本</span>
+                        <span class="keyword">#就业压力</span>
+                    </div>
+                    <div class="topic-stats">
+                        <span class="badge badge-info">💬 80+条讨论</span>
+                        <span class="badge badge-info">👥 12+人参与</span>
+                        <span class="badge badge-info">🕐 16:00-18:00</span>
+                    </div>
+                </div>
+                
+                <div class="card topic-card">
+                    <div class="topic-card-header">
+                        <h3>中美关系与国际风云</h3>
+                        <div class="topic-heat">
+                            🔥 <span>70</span>
+                        </div>
+                    </div>
+                    <span class="badge badge-primary">时事政治</span>
+                    <p class="topic-summary">围绕中美领导人通话、特朗普对华政策（留学生、一个中国政策）的“闪电变脸”，群内展开了热烈讨论。从最初的“明天可以跌了”到“竞价满仓”，市场情绪随新闻摇摆。群友们对国际关系对股市的影响、大国博弈的复杂性以及政治人物的善变表达了各自的看法与猜测，体现了对宏观局势的高度关注。</p>
+                    <div class="deep-comment">
+                        <div class="comment-header">
+                            <span class="comment-icon">🎯</span>
+                            <span class="comment-label">评论</span>
+                        </div>
+                        <div class="comment-content">
+                            <p class="comment-text">棋盘上的棋子总以为能洞察棋手的意图，殊不知棋手们有时也只是在掷骰子，顺便看看对方被惊吓的表情，并称之为“战略定力”。</p>
+                        </div>
+                    </div>
+                    <div class="topic-keywords">
+                        <span class="keyword">#中美关系</span>
+                        <span class="keyword">#特朗普</span>
+                        <span class="keyword">#国际政治</span>
+                    </div>
+                    <div class="topic-stats">
+                        <span class="badge badge-info">💬 60+条讨论</span>
+                        <span class="badge badge-info">👥 10+人参与</span>
+                        <span class="badge badge-info">🕐 20:50-23:00</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 2. 实用教程与资源分享 -->
+        <section class="tutorials">
+            <h2>📚 实用教程与资源分享</h2>
+            <div class="card-grid card-grid-3">
+                <div class="card tutorial-card">
+                    <span class="badge badge-primary">RESOURCE</span>
+                    <h3>LifeGrid Pro 人生格子</h3>
+                    <div class="tutorial-meta">
+                        <span>👤 发财童子</span>
+                        <span>🕐 18:38</span>
+                    </div>
+                    <p class="tutorial-summary">分享了一个名为 LifeGrid Pro 的网站，似乎是一个用于规划或记录人生的工具，界面简洁，引发了群友兴趣。</p>
+                    <div class="key-points">
+                        <h4>核心要点：</h4>
+                        <ul>
+                            <li>人生规划工具</li>
+                            <li>可视化人生进度</li>
+                            <li>界面美观</li>
+                        </ul>
+                    </div>
+                    <div class="tutorial-link">
+                        <a href="https://lifegrid.pro/#" target="_blank">🔗 查看原文</a>
+                    </div>
+                </div>
+                <div class="card tutorial-card">
+                    <span class="badge badge-primary">RESOURCE</span>
+                    <h3>柴PIP - 产品经理工具导航</h3>
+                    <div class="tutorial-meta">
+                        <span>👤 发财童子</span>
+                        <span>🕐 18:49</span>
+                    </div>
+                    <p class="tutorial-summary">分享了柴PIP网站，一个聚合了各类产品经理常用工具和资源的导航网站，对互联网从业者有较高实用价值。</p>
+                    <div class="key-points">
+                        <h4>核心要点：</h4>
+                        <ul>
+                            <li>产品经理工具集</li>
+                            <li>资源导航</li>
+                            <li>提高工作效率</li>
+                        </ul>
+                    </div>
+                    <div class="tutorial-link">
+                        <a href="https://www.chaipip.com/" target="_blank">🔗 查看原文</a>
+                    </div>
+                </div>
+                <div class="card tutorial-card">
+                    <span class="badge badge-primary">NEWS</span>
+                    <h3>DIY炒股机器人开发者获刑</h3>
+                    <div class="tutorial-meta">
+                        <span>👤 发财童子</span>
+                        <span>🕐 18:40</span>
+                    </div>
+                    <p class="tutorial-summary">分享了一则新闻，关于个人开发者因制作和销售炒股机器人程序，突破券商交易系统安全措施而被判刑。警示了技术滥用的法律风险，并@了群内技术人员UioSun。</p>
+                    <div class="key-points">
+                        <h4>核心要点：</h4>
+                        <ul>
+                            <li>非法侵入计算机系统</li>
+                            <li>技术中立与法律边界</li>
+                            <li>量化交易合规性</li>
+                        </ul>
+                    </div>
+                    <div class="tutorial-link">
+                        <a href="https://mp.weixin.qq.com/s/pC4GKGwL94rAJP1Yf7GXUg" target="_blank">🔗 查看原文</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 3. 重要消息汇总 -->
+        <section class="important-messages">
+            <h2>📌 重要消息汇总</h2>
+            <div class="card-grid card-grid-2">
+                <div class="card message-card">
+                    <div class="message-header">
+                        <div>
+                            <span class="badge badge-primary">财经新闻</span>
+                            <span class="badge priority-high">高优先级</span>
+                        </div>
+                        <span class="message-time">🕐 22:40</span>
+                    </div>
+                    <h4>特朗普政府与中方通话，涉及留学生与一中政策</h4>
+                    <p class="message-sender">发送者：发财童子 (分享链接)</p>
+                    <div class="message-content">
+                        <p>特朗普表示欢迎中国留学生来美学习，并称美方将继续奉行一个中国政策。同时，中方强调校正中美关系排除干扰破坏尤为重要。此消息引发群内对美股、A股及黄金走势的连锁反应讨论。</p>
+                    </div>
+                </div>
+                 <div class="card message-card">
+                    <div class="message-header">
+                        <div>
+                            <span class="badge badge-primary">行业动态</span>
+                            <span class="badge priority-medium">中优先级</span>
+                        </div>
+                        <span class="message-time">🕐 11:30 & 16:20</span>
+                    </div>
+                    <h4>花旗银行IT业务调整，员工获高额补偿</h4>
+                    <p class="message-sender">发送者：发财童子, 每天都在挨打的主力 (分享链接与截图)</p>
+                    <div class="message-content">
+                        <p>花旗集团计划裁减上海和大连技术中心约3500人，部分员工获得N+6至N+10的补偿。此事引发群友对国内外企业裁员差异、金融行业稳定性及个人职业规划的讨论。</p>
+                    </div>
+                </div>
+                <div class="card message-card">
+                    <div class="message-header">
+                        <div>
+                            <span class="badge badge-primary">群规提醒</span>
+                            <span class="badge priority-medium">中优先级</span>
+                        </div>
+                        <span class="message-time">🕐 11:28</span>
+                    </div>
+                    <h4>不当内容警告与处理</h4>
+                    <p class="message-sender">发送者：富联 | 水晶 | 招商 | 领益, 万一冕⑤ 加v</p>
+                    <div class="message-content">
+                        <p>群成员“愿x国像上证指数一样繁荣”因发送令人不适的视频，受到管理员警告，并被“免职处理”。强调了群聊内容的底线和社区规范的重要性。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 4. 精彩对话 -->
+        <section class="interesting-dialogues">
+            <h2>💭 精彩对话与金句</h2>
+            <div class="card-grid card-grid-1">
+                <div class="card dialogue-card">
+                    <span class="badge badge-secondary">股市玄学</span>
+                    <div class="dialogue-content">
+                        <div class="dialogue-bubble left">
+                            <div class="dialogue-speaker">发财童子 | 爱吃糖火烧的天象观测师</div>
+                            <p>不好，今天a股要暴涨</p>
+                            <span class="message-time">08:00:10</span>
+                        </div>
+                        <div class="dialogue-bubble right">
+                            <div class="dialogue-speaker">发财童子 | 爱吃糖火烧的天象观测师</div>
+                            <p>盯住 证券今天，星象告诉我，今天要起飞。实现一次越起</p>
+                            <span class="message-time">08:56:49</span>
+                        </div>
+                         <div class="dialogue-bubble left">
+                            <div class="dialogue-speaker">每天都在挨打的主力</div>
+                            <p>开局不利啊</p>
+                            <span class="message-time">09:26:37</span>
+                        </div>
+                    </div>
+                    <div class="dialogue-highlight">
+                        💡 "星象，一种薛定谔的猫，涨了就是星象准，跌了就是星辰在变轨。"
+                    </div>
+                </div>
+                <div class="card dialogue-card">
+                    <span class="badge badge-secondary">职场悲欢</span>
+                    <div class="dialogue-content">
+                        <div class="dialogue-bubble left">
+                            <div class="dialogue-speaker">巴韭特</div>
+                            <p>早上10点打开账户，这个B班不上也罢，现在看了眼，在想晚上去哪送外卖了</p>
+                            <span class="message-time">10:59:49</span>
+                        </div>
+                        <div class="dialogue-bubble right">
+                            <div class="dialogue-speaker">UioSun</div>
+                            <p>亏大了，写的服务出了问题，正在焦虑</p>
+                            <span class="message-time">10:59:56</span>
+                        </div>
+                    </div>
+                    <div class="dialogue-highlight">
+                        💡 "上班是为了不上班，炒股是为了送外卖，生活就是这么个圈，谁也别想跑出去。"
+                    </div>
+                </div>
+                 <div class="card dialogue-card">
+                    <span class="badge badge-secondary">育儿焦虑</span>
+                    <div class="dialogue-content">
+                        <div class="dialogue-bubble left">
+                            <div class="dialogue-speaker">赚钱换车（1/3）</div>
+                            <p>一线城市 养一个小孩到大学毕业的成本是多少</p>
+                            <span class="message-time">17:25:31</span>
+                        </div>
+                        <div class="dialogue-bubble right">
+                            <div class="dialogue-speaker">发财童子 | 爱吃糖火烧的天象观测师</div>
+                            <p>上海和北京家庭0-17岁孩子的平均养育成本分别为101万元和93.6万元。</p>
+                            <span class="message-time">17:27:30</span>
+                        </div>
+                         <div class="dialogue-bubble left">
+                            <div class="dialogue-speaker">David</div>
+                            <p>算了还是养宠物吧</p>
+                            <span class="message-time">17:28:11</span>
+                        </div>
+                    </div>
+                    <div class="dialogue-highlight">
+                        💡 "养娃如投资，成本百万起，风险全自担，回报看天意，不如养只猫，至少掉毛不掉价。"
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 5. 问答精选 -->
+        <section class="questions-answers">
+            <h2>❓ 问答精选</h2>
+            <div class="card-grid card-grid-1">
+                <div class="card qa-card">
+                    <div class="question">
+                        <div class="question-header">
+                            <span class="badge badge-info">问题</span>
+                            <span class="question-time">🕐 08:32:02</span>
+                        </div>
+                        <h4>（关于某财经图片）这是利好还是利空</h4>
+                        <p class="question-asker">巴韭特</p>
+                        <div class="question-tags">
+                            <span class="tag">#股市</span>
+                            <span class="tag">#消息解读</span>
+                        </div>
+                    </div>
+                    <div class="answers">
+                        <div class="answer">
+                            <div class="answer-header">
+                                <span class="badge badge-primary">解答</span>
+                                <span class="answer-time">🕐 08:56:49</span>
+                            </div>
+                            <p class="answer-responder">发财童子 | 爱吃糖火烧的天象观测师</p>
+                            <div class="answer-content">
+                                <p>盯住 证券今天，星象告诉我，今天要起飞。实现一次越起</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card qa-card">
+                    <div class="question">
+                        <div class="question-header">
+                            <span class="badge badge-info">问题</span>
+                            <span class="question-time">🕐 11:46:24</span>
+                        </div>
+                        <h4>比较好奇，京东宣传的20薪，普遍能拿多少</h4>
+                        <p class="question-asker">无知的小狼</p>
+                        <div class="question-tags">
+                            <span class="tag">#职场</span>
+                            <span class="tag">#薪酬福利</span>
+                        </div>
+                    </div>
+                    <div class="answers">
+                        <div class="answer">
+                            <div class="answer-header">
+                                <span class="badge badge-primary">解答</span>
+                                <span class="answer-time">🕐 11:47:29</span>
+                            </div>
+                            <p class="answer-responder">发财童子 | 爱吃糖火烧的天象观测师</p>
+                            <div class="answer-content">
+                                <p>据知情人士回复，比例不高，尤其是出色牛马，通常拿不到。</p>
+                            </div>
+                        </div>
+                         <div class="answer">
+                            <div class="answer-header">
+                                <span class="badge badge-primary">补充</span>
+                                <span class="answer-time">🕐 11:50:02</span>
+                            </div>
+                            <p class="answer-responder">无知的小狼</p>
+                            <div class="answer-content">
+                                <p>（拿不到20薪的话，一般是）16吧</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 6. 数据统计与可视化 -->
+        <section class="analytics">
+            <h2>📈 数据统计与分析</h2>
+            
+            <div class="analytics-grid">
+                <div class="stat-card">
+                    <div class="stat-label">总消息数</div>
+                    <div class="stat-number">715</div>
+                    <div class="stat-change">日均活跃</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">活跃用户</div>
+                    <div class="stat-number">40</div>
+                    <div class="stat-change">参与率 [N/A]%</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">图片/链接分享</div>
+                    <div class="stat-number">60+</div>
+                    <div class="stat-change">信息密度高</div>
+                </div>
+            </div>
+            
+            <h3>🔥 话题热度分布</h3>
+            <div class="heat-distribution">
+                <div class="heat-item">
+                    <div class="heat-header">
+                        <span class="heat-topic">股市“天象”与实战</span>
+                        <span class="heat-percentage">35%</span>
+                    </div>
+                    <div class="heat-bar">
+                        <div class="heat-fill" style="width: 35%; background: linear-gradient(90deg, #667eea, #764ba2);"></div>
+                    </div>
+                    <div class="heat-stats">
+                        <span>250+条消息</span> · <span>20+人参与</span>
+                    </div>
+                </div>
+                <div class="heat-item">
+                    <div class="heat-header">
+                        <span class="heat-topic">舌尖上的群聊</span>
+                        <span class="heat-percentage">21%</span>
+                    </div>
+                    <div class="heat-bar">
+                        <div class="heat-fill" style="width: 21%; background: linear-gradient(90deg, #f093fb, #f5576c);"></div>
+                    </div>
+                    <div class="heat-stats">
+                        <span>150+条消息</span> · <span>15+人参与</span>
+                    </div>
+                </div>
+                 <div class="heat-item">
+                    <div class="heat-header">
+                        <span class="heat-topic">经济寒流下的众生相</span>
+                        <span class="heat-percentage">11%</span>
+                    </div>
+                    <div class="heat-bar">
+                        <div class="heat-fill" style="width: 11%; background: linear-gradient(90deg, #4facfe, #00f2fe);"></div>
+                    </div>
+                    <div class="heat-stats">
+                        <span>80+条消息</span> · <span>12+人参与</span>
+                    </div>
+                </div>
+            </div>
+            
+            <h3>🏆 活跃度排行榜</h3>
+            <div class="participants-ranking">
+                <div class="participant-card">
+                    <div class="participant-rank rank-1">1</div>
+                    <div class="participant-info">
+                        <div class="participant-name">发财童子 | 爱吃糖火烧的天象观测师</div>
+                        <div class="participant-stats">
+                            <span>💬 200+条</span>
+                            <span>⏱️ 平均[N/A]分钟</span>
+                            <span>🎯 参与 5+个话题</span>
+                        </div>
+                        <div class="participant-traits">
+                            <span class="badge badge-secondary">天象股神</span>
+                            <span class="badge badge-secondary">美食家</span>
+                            <span class="badge badge-secondary">信息源</span>
+                            <span class="badge badge-secondary">气氛组组长</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="participant-card">
+                    <div class="participant-rank rank-2">2</div>
+                    <div class="participant-info">
+                        <div class="participant-name">富联 | 水晶 | 招商 | 领益</div>
+                        <div class="participant-stats">
+                            <span>💬 70+条</span>
+                            <span>⏱️ 平均[N/A]分钟</span>
+                            <span>🎯 参与 4+个话题</span>
+                        </div>
+                        <div class="participant-traits">
+                            <span class="badge badge-secondary">理性派</span>
+                            <span class="badge badge-secondary">新闻搬运工</span>
+                            <span class="badge badge-secondary">吃瓜群众</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="participant-card">
+                    <div class="participant-rank rank-3">3</div>
+                    <div class="participant-info">
+                        <div class="participant-name">每天都在挨打的主力</div>
+                        <div class="participant-stats">
+                            <span>💬 60+条</span>
+                            <span>⏱️ 平均[N/A]分钟</span>
+                            <span>🎯 参与 3+个话题</span>
+                        </div>
+                        <div class="participant-traits">
+                            <span class="badge badge-secondary">股市常客</span>
+                            <span class="badge badge-secondary">老乡美食家</span>
+                            <span class="badge badge-secondary">表情包大户</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <h3>⏰ 时段活跃度分析</h3>
+            <div class="time-activity">
+                <div class="time-chart">
+                    <div class="time-slot" style="background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(102, 126, 234, 0.3));"><div class="time-hour">00-08</div><div class="time-count">0</div></div>
+                    <div class="time-slot" style="background: linear-gradient(135deg, rgba(102, 126, 234, 0.6), rgba(102, 126, 234, 0.9));"><div class="time-hour">08-10</div><div class="time-count">125</div></div>
+                    <div class="time-slot" style="background: linear-gradient(135deg, rgba(102, 126, 234, 0.8), rgba(102, 126, 234, 1.0));"><div class="time-hour">10-12</div><div class="time-count">180</div></div>
+                    <div class="time-slot" style="background: linear-gradient(135deg, rgba(102, 126, 234, 0.5), rgba(102, 126, 234, 0.8));"><div class="time-hour">12-14</div><div class="time-count">110</div></div>
+                    <div class="time-slot" style="background: linear-gradient(135deg, rgba(102, 126, 234, 0.7), rgba(102, 126, 234, 0.95));"><div class="time-hour">14-16</div><div class="time-count">165</div></div>
+                    <div class="time-slot" style="background: linear-gradient(135deg, rgba(102, 126, 234, 0.4), rgba(102, 126, 234, 0.7));"><div class="time-hour">16-18</div><div class="time-count">90</div></div>
+                    <div class="time-slot" style="background: linear-gradient(135deg, rgba(102, 126, 234, 0.2), rgba(102, 126, 234, 0.5));"><div class="time-hour">18-20</div><div class="time-count">25</div></div>
+                    <div class="time-slot" style="background: linear-gradient(135deg, rgba(102, 126, 234, 0.4), rgba(102, 126, 234, 0.7));"><div class="time-hour">20-22</div><div class="time-count">78</div></div>
+                    <div class="time-slot" style="background: linear-gradient(135deg, rgba(102, 126, 234, 0.5), rgba(102, 126, 234, 0.8));"><div class="time-hour">22-24</div><div class="time-count">102</div></div>
+                </div>
+            </div>
+            
+            <h3>🌙 熬夜冠军</h3>
+            <div class="night-owl-card card">
+                <div class="owl-content">
+                    <div class="owl-crown">👑</div>
+                    <div class="owl-info">
+                        <h4>发财童子 | 爱吃糖火烧的天象观测师</h4>
+                        <p class="owl-title">"子夜黄金眼"</p>
+                        <div class="owl-stats">
+                            <span>🕐 最晚活跃：23:56</span>
+                            <span>🌙 深夜消息：20+条</span>
+                        </div>
+                        <p class="owl-quote">"[链接|伦敦金 XAUUSD 最新价 3341.0500 涨跌幅 -0.91% ...]"</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 7. 词云展示 -->
+        <section class="word-cloud">
+            <h2>☁️ 热词云图</h2>
+            <div class="cloud-container">
+                <div class="cloud-3d">
+                    <div class="cloud-layer">
+                        <span class="cloud-word" style="left: 40%; top: 20%; font-size: 38px; color: #667eea; transform: translateZ(110px) rotateY(10deg);">A股</span>
+                        <span class="cloud-word" style="left: 60%; top: 30%; font-size: 30px; color: #764ba2; transform: translateZ(90px) rotateY(-15deg);">天象</span>
+                        <span class="cloud-word" style="left: 30%; top: 40%; font-size: 28px; color: #f093fb; transform: translateZ(80px) rotateY(20deg);">发财童子</span>
+                        <span class="cloud-word" style="left: 70%; top: 50%; font-size: 26px; color: #f5576c; transform: translateZ(70px) rotateY(-10deg);">美食</span>
+                        <span class="cloud-word" style="left: 45%; top: 60%; font-size: 25px; color: #4facfe; transform: translateZ(75px) rotateY(5deg);">特朗普</span>
+                        <span class="cloud-word" style="left: 20%; top: 25%; font-size: 24px; color: #ff7043; transform: translateZ(60px) rotateY(25deg);">红包</span>
+                        <span class="cloud-word" style="left: 75%; top: 35%; font-size: 22px; color: #26c6da; transform: translateZ(50px) rotateY(-20deg);">银行</span>
+                        <span class="cloud-word" style="left: 50%; top: 70%; font-size: 20px; color: #66bb6a; transform: translateZ(40px) rotateY(15deg);">科技</span>
+                        <span class="cloud-word" style="left: 35%; top: 15%; font-size: 18px; color: #ef5350; transform: translateZ(30px) rotateY(-5deg);">利好</span>
+                        <span class="cloud-word" style="left: 65%; top: 75%; font-size: 17px; color: #ab47bc; transform: translateZ(20px) rotateY(30deg);">裁员</span>
+                        <span class="cloud-word" style="left: 55%; top: 10%; font-size: 23px; color: #667eea; transform: translateZ(55px) rotateY(-25deg);">预测</span>
+                        <span class="cloud-word" style="left: 25%; top: 50%; font-size: 21px; color: #764ba2; transform: translateZ(45px) rotateY(10deg);">000651</span>
+                        <span class="cloud-word" style="left: 80%; top: 65%; font-size: 19px; color: #f093fb; transform: translateZ(35px) rotateY(-30deg);">吃</span>
+                        <span class="cloud-word" style="left: 15%; top: 70%; font-size: 20px; color: #f5576c; transform: translateZ(40px) rotateY(20deg);">泡馍</span>
+                        <span class="cloud-word" style="left: 50%; top: 45%; font-size: 22px; color: #4facfe; transform: translateZ(50px) rotateY(-10deg);">主力</span>
+                         <span class="cloud-word" style="left: 42%; top: 82%; font-size: 18px; color: #ff7043; transform: translateZ(30px) rotateY(10deg);">涨</span>
+                        <span class="cloud-word" style="left: 68%; top: 12%; font-size: 17px; color: #26c6da; transform: translateZ(25px) rotateY(-15deg);">黄金</span>
+                        <span class="cloud-word" style="left: 33%; top: 65%; font-size: 19px; color: #66bb6a; transform: translateZ(35px) rotateY(5deg);">中美</span>
+                        <span class="cloud-word" style="left: 77%; top: 80%; font-size: 16px; color: #ef5350; transform: translateZ(15px) rotateY(-20deg);">韭菜</span>
+                        <span class="cloud-word" style="left: 22%; top: 33%; font-size: 20px; color: #ab47bc; transform: translateZ(40px) rotateY(25deg);">分享</span>
+                    </div>
+                </div>
+                
+                <div class="cloud-legend">
+                    <div class="legend-item">
+                        <span class="legend-dot" style="background-color: #667eea;"></span>
+                        <span>股市投资</span>
+                    </div>
+                    <div class="legend-item">
+                        <span class="legend-dot" style="background-color: #f093fb;"></span>
+                        <span>生活美食</span>
+                    </div>
+                    <div class="legend-item">
+                        <span class="legend-dot" style="background-color: #f5576c;"></span>
+                        <span>时事经济</span>
+                    </div>
+                     <div class="legend-item">
+                        <span class="legend-dot" style="background-color: #4facfe;"></span>
+                        <span>群内互动</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 8. 报告总结 -->
+        <section class="summary">
+            <h2>📝 2024年06月05日总结</h2>
+            <div class="card">
+                <h3>核心洞察</h3>
+                <ul>
+                    <li><strong>股市风向标与娱乐场：</strong> 群聊核心围绕“发财童子”的股市“天象预测”展开，市场讨论热烈，但实际操作与预测结果之间充满不确定性，更多体现为一种社群娱乐与情绪共振。</li>
+                    <li><strong>美食慰藉凡人心：</strong> 对各地特色美食的向往与讨论，成为群内另一大流量密码，反映了在不确定环境下，人们对具体、可感知的美好生活的追求。</li>
+                    <li><strong>宏观叙事下的个体焦虑：</strong> 从国际关系到国内经济政策，再到企业裁员和个人生计，群友们在分享信息的同时，也流露出对未来的普遍焦虑和对现实的辛辣点评。</li>
+                </ul>
+                
+                <h3>趋势分析</h3>
+                <p>当日群聊呈现三大主线：开盘至午盘，股市讨论占据绝对主导，市场情绪随“天象”波动；午后至傍晚，美食与生活话题升温，冲淡了部分投资焦虑；晚间，随着国际新闻的发酵，宏观经济与时政讨论再次成为焦点，并直接关联到次日股市预期。整体呈现出“高开（股市话题）-盘整（生活美食）-尾盘拉升（宏观时政）”的讨论热度趋势。</p>
+                
+                <h3>建议与展望</h3>
+                <p>建议群友在关注“天象”的同时，更要注重基本面分析和风险控制，毕竟星盘不能当饭吃。美食虽好，也不要贪多，健康饮食同样重要。对于宏大叙事，保持关注，独立思考，避免被短期消息过度影响个人决策。愿明日群内少些哀嚎，多些红包雨！</p>
+            </div>
+        </section>
+        
+        <footer>
+            <div class="footer-info">
+                <span>📊 数据来源：股海风云茶话会</span>
+                <span>📅 统计周期：2024年06月05日</span>
+                <span>🕐 生成时间：2024年06月06日 09:00:00</span>
+            </div>
+            <p class="disclaimer">
+                免责声明：本报告基于群聊公开讨论内容自动生成，仅供参考。如有不当内容，请联系管理员处理。
+            </p>
+        </footer>
+    </div>
+    <script>
+        // Optional: Add some simple JS for interactivity if needed later
+        // Example: Animate word cloud words more dynamically
+        document.addEventListener('DOMContentLoaded', () => {
+            const words = document.querySelectorAll('.cloud-word');
+            const radius = 150; // Radius of the sphere
+
+            words.forEach((word, index) => {
+                const phi = Math.acos(-1 + (2 * index) / words.length);
+                const theta = Math.sqrt(words.length * Math.PI) * phi;
+
+                // Adjust positioning logic for a better spherical distribution
+                // These are just example calculations, might need refinement
+                let x = radius * Math.sin(phi) * Math.cos(theta);
+                let y = radius * Math.sin(phi) * Math.sin(theta);
+                let z = radius * Math.cos(phi);
+                
+                // Center the cloud more effectively
+                word.style.transform = `translate3d(${x}px, ${y}px, ${z}px) rotateY(${Math.random()*360}deg) rotateX(${Math.random()*360}deg)`;
+                
+                // Optional: Adjust font size based on Z for a pseudo-depth effect without scaling
+                // This is tricky with pure CSS transforms for perspective scaling
+                // word.style.fontSize = `${10 + (z + radius) / (2 * radius) * 20}px`;
+            });
+        });
+    </script>
+</body>
+</html>
