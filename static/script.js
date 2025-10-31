@@ -663,3 +663,110 @@
     window.ChatLogRenderer = ChatLogRenderer;
 
 })(window);
+
+/**
+ * 主题切换功能
+ * 支持明亮/深色模式切换,并保存用户偏好
+ */
+(function() {
+    'use strict';
+
+    /**
+     * 主题管理器
+     */
+    const ThemeManager = {
+        // SVG图标定义
+        icons: {
+            sun: `
+                <circle cx="12" cy="12" r="5"/>
+                <line x1="12" y1="1" x2="12" y2="3"/>
+                <line x1="12" y1="21" x2="12" y2="23"/>
+                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+                <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+                <line x1="1" y1="12" x2="3" y2="12"/>
+                <line x1="21" y1="12" x2="23" y2="12"/>
+                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+                <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+            `,
+            moon: `
+                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+            `
+        },
+
+        /**
+         * 初始化主题管理器
+         */
+        init() {
+            this.themeToggle = document.getElementById('theme-toggle');
+            this.themeIcon = document.getElementById('theme-icon');
+            this.html = document.documentElement;
+
+            if (!this.themeToggle || !this.themeIcon) {
+                console.warn('主题切换元素未找到,跳过主题切换功能初始化');
+                return;
+            }
+
+            // 从 localStorage 获取保存的主题，默认为深色模式
+            const savedTheme = localStorage.getItem('theme') || 'dark';
+
+            // 应用保存的主题
+            this.applyTheme(savedTheme);
+
+            // 绑定切换事件
+            this.themeToggle.addEventListener('click', () => this.toggleTheme());
+
+            console.log('✅ 主题切换功能初始化完成');
+        },
+
+        /**
+         * 应用主题
+         * @param {string} theme - 主题名称 ('light' 或 'dark')
+         */
+        applyTheme(theme) {
+            if (theme === 'dark') {
+                this.html.setAttribute('data-theme', 'dark');
+                this.themeIcon.innerHTML = this.icons.moon;
+                this.themeToggle.setAttribute('aria-checked', 'true');
+            } else {
+                this.html.setAttribute('data-theme', 'light');
+                this.themeIcon.innerHTML = this.icons.sun;
+                this.themeToggle.setAttribute('aria-checked', 'false');
+            }
+        },
+
+        /**
+         * 切换主题
+         */
+        toggleTheme() {
+            const currentTheme = this.html.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+
+            this.applyTheme(newTheme);
+            localStorage.setItem('theme', newTheme);
+
+            // 触发自定义事件,通知其他组件主题已切换
+            window.dispatchEvent(new CustomEvent('themechange', { 
+                detail: { theme: newTheme }
+            }));
+        },
+
+        /**
+         * 获取当前主题
+         * @returns {string} 当前主题名称
+         */
+        getCurrentTheme() {
+            return this.html.getAttribute('data-theme') || 'dark';
+        }
+    };
+
+    // 等待 DOM 加载完成后初始化
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', () => ThemeManager.init());
+    } else {
+        ThemeManager.init();
+    }
+
+    // 导出到全局
+    window.ThemeManager = ThemeManager;
+
+})();
