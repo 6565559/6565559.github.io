@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>群聊日报 by ChatInsight</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/6565559/6565559.github.io@main/static/style-v1.0.css">
+    <!-- 词云库：专业的词云布局算法 -->
+    <script src="https://cdn.jsdelivr.net/npm/wordcloud@1.2.2/src/wordcloud2.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/6565559/6565559.github.io@main/static/script-v1.0.js"></script>
+</head>
+<body>
+    <!-- 主题切换开关 -->
+    <div class="theme-toggle-wrapper">
+        <div class="theme-toggle" id="theme-toggle" role="switch" aria-label="切换主题">
+            <div class="theme-toggle-slider">
+                <svg id="theme-icon" viewBox="0 0 24 24">
+                    <!-- 图标会根据主题动态切换 -->
+                </svg>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- 头部信息 -->
+        <header id="report-header">
+            <!-- JS动态生成 -->
+        </header>
+
+        <!-- 1. 讨论热点 -->
+        <section class="hot-topics">
+            <h2 id="hot-topics-title">📊 讨论热点</h2>
+            <div class="card-grid card-grid-2" id="hot-topics-container">
+                <!-- JS动态生成 -->
+            </div>
+        </section>
+        
+        <!-- 2. 实用教程与资源分享 -->
+        <section class="tutorials">
+            <h2>📚 实用教程与资源分享</h2>
+            <div class="card-grid card-grid-3" id="shared-resources-container">
+                <!-- JS动态生成 -->
+            </div>
+        </section>
+        
+        <!-- 5. 问答精选 -->
+        <section class="questions-answers">
+            <h2>❓ 问答精选</h2>
+            <div class="card-grid card-grid-1" id="qa-highlights-container">
+                <!-- JS动态生成 -->
+            </div>
+        </section>
+        
+        <!-- 6. 数据统计与可视化 -->
+        <section class="analytics">
+            <h2>📈 数据统计与分析</h2>
+            
+            <!-- 话题热度分布 -->
+            <h3>🔥 话题热度分布</h3>
+            <div class="heat-distribution" id="heat-distribution-container">
+                <!-- JS动态生成 -->
+            </div>
+            
+            <!-- 活跃度排行榜 -->
+            <h3>🏆 活跃度排行榜</h3>
+            <div class="participants-ranking" id="activity-ranking-container">
+                <!-- JS动态生成 -->
+            </div>
+            
+            <!-- 时段活跃度分析 -->
+            <h3>⏰ 时段活跃度分析</h3>
+            <div class="time-activity">
+                <div class="time-chart" id="hourly-activity-chart">
+                    <!-- JS动态生成 -->
+                </div>
+            </div>
+            
+            <!-- 熬夜冠军 -->
+            <div id="night-owl-section">
+                 <!-- JS动态生成 -->
+            </div>
+        </section>
+        
+        <!-- 7. 词云展示 -->
+        <section class="word-cloud">
+            <h2>☁️ 热词云图</h2>
+            <div class="cloud-container" id="word-cloud-container">
+                <!-- JS动态生成 -->
+            </div>
+        </section>
+        
+        <!-- 8. 报告总结 -->
+        <section class="summary">
+            <h2 id="summary-title">📝 总结</h2>
+            <div class="card" id="report-summary-container">
+                <!-- JS动态生成 -->
+            </div>
+        </section>
+        
+        <!-- 页脚信息 -->
+        <footer id="report-footer">
+            <!-- JS动态生成 -->
+        </footer>
+    </div>
+
+    <script>
+    const reportData = {"reportInfo":{"groupName":"程序员v友一帆风顺交流群","reportType":"日报","dateRange":"2025-10-29","totalMessages":693,"activeUsers":42},"hotTopics":[{"title":"A股激战：热门股的悲欢与“卖飞”哲学","category":"股市投资","summary":"今日群内讨论的核心围绕“阳光电源”、“工业富联”和“ST华通”等热门股票展开。成员们在涨跌中经历了“差点卖飞”、“割肉”与“回本”的完整心路历程。C总因精准抄底阳光电源被封神，而大部分人则在“卖飞”后的懊悔和“套牢”中的坚守之间反复横跳，生动上演了一出股市版的悲喜剧。","deepComment":"一个赌场，发牌员用镜子取代了窗户，于是你只能看到自己惊惶的倒影，伴随着为别人响起的头奖钟声。","keywords":["阳光电源","工业富联","ST华通","卖飞","割肉","回本"],"stats":{"messageCount":215,"participantCount":25}},{"title":"新能源车辩论会：从“车载马桶”到理想的未来","category":"行业观察","summary":"理想汽车再次成为群内焦点，但讨论角度却天马行空。一场关于“车载智能马桶”和“一边开车一边拉屎”功能的脑洞风暴，将产品经理式的戏谑发挥到极致。与此同时，群友对理想、赛力斯等国产新能源车的安全性、市场策略和财报表现进行了严肃探讨，展现了在调侃与深度分析间无缝切换的独特群聊风格。","deepComment":"争论汽车是否需要智能马桶，就像在泰坦尼克撞上冰山后，认真讨论救生艇该漆成什么颜色。","keywords":["理想汽车","赛力斯","车载马桶","新能源车","财报","小米汽车"],"stats":{"messageCount":98,"participantCount":11}},{"title":"风口追逐：AI、储能与游戏产业的投资逻辑","category":"趋势分析","summary":"在工业富联超预期的财报刺激下，群内对AI服务器、半导体及储能概念的热情被点燃。成员们积极分享相关新闻、研报，并讨论了江波龙、澜起科技等个股。此外，关于“十五五”规划首次提及网络游戏，引发了对华通、恺英网络等游戏股价值的重估，以及对《热血传奇》“麻痹戒指”等远古游戏道具价值的怀旧追忆。","deepComment":"我们都在追逐名为'未来'的蝴蝶，一场疯狂、上气不接下气的冲刺，最后发现抓住的只是涂了新油漆的去年的飞蛾。","keywords":["AI服务器","储能","网络游戏","半导体","财报","十五五"],"stats":{"messageCount":75,"participantCount":14}},{"title":"技术人生：程序员的炒股日常与SSR难题","category":"技术与生活","summary":"作为程序员交流群，技术讨论虽迟但到。“垃圾证券等风来”提出的“Next.js SSR项目QPS上不去”的问题，引发了前端开发者的共鸣与自嘲。这种白天解决技术难题、晚上研究K线图的生活状态，以及调侃“饭碗没钱补仓了”的黑色幽默，构成了群内独特的文化底色。","deepComment":"程序员白天跟精确到毫秒的逻辑搏斗，晚上却把钱押在逻辑堪比醉汉梦话的市场上。","keywords":["Next.js","SSR","QPS","前端","AI编程","补仓"],"stats":{"messageCount":22,"participantCount":6}}],"sharedResources":[{"type":"NEWS","title":"中信证券研报：印尼成全球铝业发展热土","sharer":"发财童子 | 爱吃糖火烧的天象观测师","time":"10:56:40","summary":"分享了中信证券关于印尼铝业发展的研究报告。报告指出印尼铝土矿成本优势突出，预测未来氧化铝产能将大幅增长，并看好电解铝行业的投资机会。","keyPoints":["印尼铝土矿成本优势显著","预测2025-30年印尼氧化铝/电解铝产能将大幅增加","看好电解铝行业投资机会"],"url":"N/A"},{"type":"NEWS","title":"储能概念新闻：阳光电源市值突破4000亿","sharer":"发财童子 | 爱吃糖火烧的天象观测师","time":"15:18:51","summary":"分享了一则关于储能概念股上涨的新闻，重点提及阳光电源在发布强劲财报后，股价大涨超15%，总市值突破4000亿。","keyPoints":["阳光电源前三季度净利润同比增长56%","国内储能项目新增招标量同比增长97.7%","储能板块多只股票表现强势"],"url":"N/A"},{"type":"RESOURCE","title":"V2EX热帖：2块钱吃西贝","sharer":"发财童子 | 爱吃糖火烧的天象观测师","time":"17:02:10","summary":"分享了一个V2EX社区的热门帖子，内容关于如何利用优惠以极低价格（2元）吃到西贝莜面村，引发了群内关于消费和商业模式的讨论。","keyPoints":["利用平台优惠实现低价消费","讨论这种模式对餐饮行业的影响","思考用户习惯培养的商业逻辑"],"url":"https://www.v2ex.com/t/1169124#reply258"}],"qaHighlights":[{"question":{"asker":"st华通 阳光电源","content":"法师 我有个票 套了好久 今年到现在涨了15%不到 是不是可以割掉了 换护电了","time":"10:17:18"},"bestAnswer":{"responder":"David","content":"这种个人觉得资金是有成本的，你换成好点的票估计都回本了，再不然换永盈","time":"10:22:32"}},{"question":{"asker":"铭爷","content":"兄弟们 155 经济增速目标有说吗","time":"11:57:42"},"bestAnswer":{"responder":"无名之辈","content":"有，5年的目标继续5%","time":"11:58:03"}},{"question":{"asker":"垃圾证券等风来","content":"我nextjs ssr项目qps上不去","time":"11:39:33"},"bestAnswer":{"responder":"Milk","content":"没事，我也是啥比前端。但是node老弟是真不会，问ai吧","time":"11:42:38"}}],"analytics":{"activityRanking":[{"rank":1,"name":"发财童子 | 爱吃糖火烧的天象观测师","messageCount":164,"traits":["话题发动机","意见领袖","信息分享者","群内法师"]},{"rank":2,"name":"周末泡面达人(____才买汽车股）","messageCount":92,"traits":["捧哏大师","理性分析","段子手"]},{"rank":3,"name":"歌尔股份 四川长虹 浪潮信息","messageCount":49,"traits":["气氛组","信息搬运工","AI编程"]},{"rank":4,"name":"万一冕⑤ 加v","messageCount":47,"traits":["趋势跟随者","活跃分子","ST爱好者"]},{"rank":5,"name":"Milk","messageCount":46,"traits":["积极提问","晒单常客","啥比前端"]}],"hourlyActivity":[{"hour":"00","count":0},{"hour":"01","count":0},{"hour":"02","count":0},{"hour":"03","count":0},{"hour":"04","count":0},{"hour":"05","count":0},{"hour":"06","count":0},{"hour":"07","count":0},{"hour":"08","count":0},{"hour":"09","count":126},{"hour":"10","count":121},{"hour":"11","count":145},{"hour":"12","count":9},{"hour":"13","count":42},{"hour":"14","count":99},{"hour":"15","count":112},{"hour":"16","count":28},{"hour":"17","count":48},{"hour":"18","count":41},{"hour":"19","count":14},{"hour":"20","count":11},{"hour":"21","count":11},{"hour":"22","count":14},{"hour":"23","count":5}],"nightOwl":{"name":"神秘用户","title":"守夜冠军","lastActiveTime":"23:57:50","lastMessage":"惯例2点公布，2点半演讲】"}},"wordCloud":[{"word":"理想","weight":100},{"word":"阳光电源","weight":98},{"word":"华通","weight":95},{"word":"发财童子","weight":85},{"word":"工业富联","weight":82},{"word":"财报","weight":75},{"word":"巴韭特","weight":72},{"word":"卖飞","weight":68},{"word":"赛力斯","weight":65},{"word":"割肉","weight":60},{"word":"回本","weight":58},{"word":"AI","weight":55},{"word":"马桶","weight":52},{"word":"证券","weight":50},{"word":"游戏","weight":48}],"reportSummary":{"insights":["群内情绪与A股热门板块高度同步，阳光电源、工业富联等龙头股的日内波动直接主导了讨论的悲喜基调，呈现出典型的“情绪市”特征。","“卖飞”和“抄底”构成了今日叙事的核心矛盾。成员在分享翻倍喜悦的同时，也充斥着对踏空行情的懊悔，以及对深套个股（如理想汽车）的自嘲式坚守。","投资讨论已超越单纯的股票买卖，延伸至宏观经济（中美会晤、经济增速）、产业政策（“十五五”规划、储能）和技术前沿（AI、SSR），体现了群成员作为程序员的跨界视野。","幽默与戏谑是群聊的润滑剂，无论是构思“车载智能马桶”的荒诞产品，还是调侃“巴韭特”的“冥灯”体质，都在高压的投资讨论中提供了情绪释放的出口。"],"trends":"随着盘后各类财报和宏观消息的密集发布，群内讨论焦点正从日内博弈转向对明日市场的预期。对AI服务器（工业富联）、储能（阳光电源）、半导体（江波龙）等高景气赛道的关注度持续升温，预示着科技股仍是未来一段时间的讨论核心。同时，对美联储议息会议的等待，也为市场增添了不确定性。","suggestions":"建议群内可在追逐热点之余，增加对投资组合策略和风险控制的结构化讨论，例如如何平衡高风险科技股与高股息价值股的仓位。此外，鼓励分享失败案例的复盘分析，而非仅仅停留在“割肉”或“卖飞”的情绪宣泄，将有助于共同提升投资认知水平。"}}
+
+    // 初始化渲染
+    document.addEventListener('DOMContentLoaded', () => {
+        // 检查外部渲染器是否加载
+        if (typeof ChatLogRenderer !== 'undefined') {
+            ChatLogRenderer.init(reportData);
+        } else {
+            console.error('❌ ChatLogRenderer 未加载，请检查 script.js 文件');
+            // 显示友好的错误提示
+            document.querySelector('.container').innerHTML = `
+                <div style="padding: 40px; text-align: center; color: #f5576c;">
+                    <h2>⚠️ 加载失败</h2>
+                    <p>渲染引擎未能正确加载，请检查以下问题：</p>
+                    <ul style="text-align: left; display: inline-block; margin: 20px auto;">
+                        <li>确认 script.js 文件存在</li>
+                        <li>检查浏览器控制台错误信息</li>
+                        <li>尝试刷新页面</li>
+                    </ul>
+                </div>
+            `;
+        }
+    });
+
+    </script>
+</body>
+</html>
