@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>群聊日报 by ChatInsight</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/6565559/6565559.github.io@main/static/style.css">
+    <!-- 词云库：专业的词云布局算法 -->
+    <script src="https://cdn.jsdelivr.net/npm/wordcloud@1.2.2/src/wordcloud2.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/6565559/6565559.github.io@main/static/script.js"></script>
+</head>
+<body>
+    <div class="container">
+        <!-- 头部信息 -->
+        <header id="report-header">
+            <!-- JS动态生成 -->
+        </header>
+
+        <!-- 1. 讨论热点 -->
+        <section class="hot-topics">
+            <h2 id="hot-topics-title">📊 讨论热点</h2>
+            <div class="card-grid card-grid-2" id="hot-topics-container">
+                <!-- JS动态生成 -->
+            </div>
+        </section>
+        
+        <!-- 2. 实用教程与资源分享 -->
+        <section class="tutorials">
+            <h2>📚 实用教程与资源分享</h2>
+            <div class="card-grid card-grid-3" id="shared-resources-container">
+                <!-- JS动态生成 -->
+            </div>
+        </section>
+        
+        <!-- 5. 问答精选 -->
+        <section class="questions-answers">
+            <h2>❓ 问答精选</h2>
+            <div class="card-grid card-grid-1" id="qa-highlights-container">
+                <!-- JS动态生成 -->
+            </div>
+        </section>
+        
+        <!-- 6. 数据统计与可视化 -->
+        <section class="analytics">
+            <h2>📈 数据统计与分析</h2>
+            
+            <!-- 话题热度分布 -->
+            <h3>🔥 话题热度分布</h3>
+            <div class="heat-distribution" id="heat-distribution-container">
+                <!-- JS动态生成 -->
+            </div>
+            
+            <!-- 活跃度排行榜 -->
+            <h3>🏆 活跃度排行榜</h3>
+            <div class="participants-ranking" id="activity-ranking-container">
+                <!-- JS动态生成 -->
+            </div>
+            
+            <!-- 时段活跃度分析 -->
+            <h3>⏰ 时段活跃度分析</h3>
+            <div class="time-activity">
+                <div class="time-chart" id="hourly-activity-chart">
+                    <!-- JS动态生成 -->
+                </div>
+            </div>
+            
+            <!-- 熬夜冠军 -->
+            <div id="night-owl-section">
+                 <!-- JS动态生成 -->
+            </div>
+        </section>
+        
+        <!-- 7. 词云展示 -->
+        <section class="word-cloud">
+            <h2>☁️ 热词云图</h2>
+            <div class="cloud-container" id="word-cloud-container">
+                <!-- JS动态生成 -->
+            </div>
+        </section>
+        
+        <!-- 8. 报告总结 -->
+        <section class="summary">
+            <h2 id="summary-title">📝 总结</h2>
+            <div class="card" id="report-summary-container">
+                <!-- JS动态生成 -->
+            </div>
+        </section>
+        
+        <!-- 页脚信息 -->
+        <footer id="report-footer">
+            <!-- JS动态生成 -->
+        </footer>
+    </div>
+
+    <script>
+    const reportData = {"reportInfo":{"groupName":"程序员v友一帆风顺交流群","reportType":"日报","dateRange":"2025-10-30","totalMessages":688,"activeUsers":42},"hotTopics":[{"title":"中美峰会及其市场连锁反应","category":"宏观经济","summary":"群内今日焦点集中于中美领导人会晤。成员们从会前期待、会中实时追踪（A50跳水），到会后解读公告，情绪经历了从“利好兑现”的悲观到对具体条款（如关税、稀土、芬太尼）的细节分析。普遍认为会谈结果符合预期，但市场反应复杂，体现了“消息落地即是利空”的经典博弈心理。","deepComment":"两个巨头在舞台上握手，交换了彼此精心装裱的自画像，台下的看客们便以为战争已经结束。","keywords":["中美会晤","特朗普","关税","利好出尽","A50","稀土"],"stats":{"messageCount":112,"participantCount":21}},{"title":"A股个股深度博弈：理想、药明与“嗷嗷叫”","category":"股市投资","summary":"个股讨论极度活跃。对“理想汽车”的讨论充满爱恨交织，从“卧龙凤雏”的调侃到对其股价的持续抱怨。对“药明康德”因股东巨额减持而引发的集体声讨，成为散户心态的集中体现。此外，代号为“嗷嗷叫”的神秘个股因其剧烈波动和财报预期，贯穿了全天的讨论，成为群内情绪的晴雨表。","deepComment":"散户们在主力的棋盘上扮演英勇的兵卒，总以为前进一步就是胜利，却忘了自己终究过不了河。","keywords":["理想汽车","药明康德","嗷嗷叫","减持","主力","割肉"],"stats":{"messageCount":185,"participantCount":28}},{"title":"三季度财报季的众生相","category":"公司财报","summary":"今日作为财报季的密集发布日，群内被海量财报信息刷屏。“发财童子”担当了信息搬运工的角色。群友们对“中际旭创”的超预期业绩表示赞叹，对“洋河股份”、“中国中免”的疲软表示失望，对“赛力斯”的“不及预期”财报展开了激烈的多空辩论。财报数据直接驱动了当日的交易决策与情绪波动。","deepComment":"财报季就像一场定期的集体幻觉，人们拿着放大镜寻找数字里的黄金，却对房间里那头叫‘趋势’的大象视而不见。","keywords":["财报季","业绩","中际旭创","赛力斯","不及预期","净利润"],"stats":{"messageCount":98,"participantCount":19}},{"title":"板块轮动与北证50热潮","category":"市场分析","summary":"市场板块轮动成为另一大议题。在“红十月”末尾，群友们积极讨论北交所的火热行情，尤其是“北证50”指数的连续大涨，引发了部分成员“追高吃鱼尾”的讨论，体现了典型的FOMO（害怕错过）心态。同时，关于有色、科技、证券等板块的轮动机会也时有提及。","deepComment":"追逐热点，就像一群人在着火的房子里寻找唯一没有烧着的那把椅子，坐上去感觉自己是幸存者，而不是下一个被点燃的。","keywords":["北证50","板块轮动","有色","科技股","FOMO","鱼尾行情"],"stats":{"messageCount":73,"participantCount":15}}],"sharedResources":[{"type":"NEWS","title":"早间市场快报","sharer":"发财童子 | 爱吃糖火烧的天象观测师","time":"09:00:01","summary":"分享了一份包含宏观经济和科技公司动态的早间市场简报，内容涵盖特朗普峰会预期、鲍威尔讲话、英伟达市值及Meta、Alphabet财报等。","keyPoints":["特朗普预计签署贸易协议","鲍威尔给12月降息降温","英伟达市值达5万亿美元","Meta、Alphabet财报发布"],"url":"https://buff.ly/HikqXT6"},{"type":"NEWS","title":"特朗普称中国芬太尼关税将减半","sharer":"莫名","time":"12:55:16","summary":"分享了关于中美会晤成果之一的新闻，报道称特朗普表示中国将芬太尼关税从20%减半至10%。","keyPoints":["芬太尼","关税减半","20% -> 10%"],"url":"https://foresightnews.pro/news/h5Detail/88590"},{"type":"RESOURCE","title":"新浪财经-机构评级","sharer":"发财童子 | 爱吃糖火烧的天象观测师","time":"16:43:12","summary":"分享了一个新浪财经的链接，该页面汇总了最新的机构对个股的评级信息，引发了关于机构评级作用的讨论。","keyPoints":["机构评级","股票评级","心理安慰"],"url":"https://stock.finance.sina.com.cn/stock/go.php/vIR_RatingNewest/index.phtml"}],"qaHighlights":[{"question":{"asker":"Juner","content":"为啥？大约好久卖？ (问黄金)","time":"09:40:11"},"bestAnswer":{"responder":"歌尔股份 四川长虹 浪潮信息","content":"明年底","time":"09:43:27"}},{"question":{"asker":"起飞🛫","content":"中美不是谈的不错 为何美股大跌呢[疑问]","time":"22:28:27"},"bestAnswer":{"responder":"歌尔股份 四川长虹 浪潮信息","content":"因为利好出尽了，后面没有利好了","time":"22:30:19"}},{"question":{"asker":"巴韭特","content":"我想问一下，我有个朋友100w本金，现在只剩58.6w了，还能回本吗","time":"18:45:14"},"bestAnswer":{"responder":"原来是凉的丶","content":"梭哈宁王删账户","time":"18:47:01"}}],"analytics":{"activityRanking":[{"rank":1,"name":"发财童子 | 爱吃糖火烧的天象观测师","messageCount":221,"traits":["话题发动机","首席信息官","法术大师"]},{"rank":2,"name":"周末泡面达人(____才买汽车股）","messageCount":86,"traits":["深度分析师","汽车股评论员","心态稳定"]},{"rank":3,"name":"歌尔股份 四川长虹 浪潮信息","messageCount":54,"traits":["观点输出者","黄金爱好者","核心参与者"]},{"rank":4,"name":"st华通 阳光电源","messageCount":52,"traits":["高频互动","实战派","法师跟随者"]},{"rank":5,"name":"阳光 华通 华友","messageCount":51,"traits":["情绪代言人","韭菜自嘲","操作纠结"]}],"hourlyActivity":[{"hour":"00","count":0},{"hour":"01","count":0},{"hour":"02","count":0},{"hour":"03","count":8},{"hour":"04","count":0},{"hour":"05","count":0},{"hour":"06","count":14},{"hour":"07","count":9},{"hour":"08","count":9},{"hour":"09","count":78},{"hour":"10","count":135},{"hour":"11","count":92},{"hour":"12","count":39},{"hour":"13","count":28},{"hour":"14","count":55},{"hour":"15","count":37},{"hour":"16","count":68},{"hour":"17","count":50},{"hour":"18","count":54},{"hour":"19","count":16},{"hour":"20","count":4},{"hour":"21","count":9},{"hour":"22","count":18},{"hour":"23","count":5}],"nightOwl":{"name":"TSLA","title":"午夜足浴思想家","lastActiveTime":"03:46:19","lastMessage":"或者去足浴店洗个脚   就行了"}},"wordCloud":[{"word":"理想","weight":100},{"word":"财报","weight":95},{"word":"发财童子","weight":92},{"word":"嗷嗷叫","weight":90},{"word":"华通","weight":88},{"word":"明天","weight":85},{"word":"药明","weight":82},{"word":"赛力斯","weight":80},{"word":"回本","weight":78},{"word":"减持","weight":75},{"word":"阳光","weight":72},{"word":"北证50","weight":70},{"word":"特朗普","weight":68},{"word":"法师","weight":65},{"word":"黄金","weight":60}],"reportSummary":{"insights":["群聊情绪受宏观事件（中美会晤）主导，从期盼转向“利好出尽”的现实主义，反映出成员对市场信息博弈的深刻理解。","个股讨论暴露了A股散户的核心痛点：对“庄家”行为的无奈、对公司治理问题（如大股东减持）的愤慨，以及在频繁操作中“卖飞”与“踩雷”的循环。","“发财童子”扮演了关键的KOL与信息枢纽角色，其发布的财报新闻和市场动态主导了下午的讨论节奏，而其“施法”等娱乐性话语则有效调节了群内紧张的投资气氛。"],"trends":"全天趋势呈现典型的“过山车”形态。上午聚焦宏观事件进行预判和博弈，市场波动剧烈；下午则转为财报驱动的个股行情，悲喜交加。从“铭爷”的深夜失恋独白开始，到收盘后众人盘点盈亏，再到晚间对美股的关注，群聊完整映射了交易者从情绪到理性分析再回归情绪的一天。","suggestions":"今日群聊是一场信息密度极高、情绪波动剧烈的马拉松。大家在宏观叙事和微观财报之间快速切换，展现了高强度的市场参与度。展望明天，作为本月最后一个交易日，“回本”的执念与财报后的市场不确定性交织。建议各位成员在喧嚣信息中保持一丝冷静，警惕“利好出尽”和“利空落地”的双重陷阱，或许，少开一次“超市”，专注于几只真正理解的票，能让账户曲线平滑一些。"}}
+
+    // 初始化渲染
+    document.addEventListener('DOMContentLoaded', () => {
+        // 检查外部渲染器是否加载
+        if (typeof ChatLogRenderer !== 'undefined') {
+            ChatLogRenderer.init(reportData);
+        } else {
+            console.error('❌ ChatLogRenderer 未加载，请检查 script.js 文件');
+            // 显示友好的错误提示
+            document.querySelector('.container').innerHTML = `
+                <div style="padding: 40px; text-align: center; color: #f5576c;">
+                    <h2>⚠️ 加载失败</h2>
+                    <p>渲染引擎未能正确加载，请检查以下问题：</p>
+                    <ul style="text-align: left; display: inline-block; margin: 20px auto;">
+                        <li>确认 script.js 文件存在</li>
+                        <li>检查浏览器控制台错误信息</li>
+                        <li>尝试刷新页面</li>
+                    </ul>
+                </div>
+            `;
+        }
+    });
+
+    </script>
+</body>
+</html>
