@@ -277,11 +277,14 @@
                     <div class="heat-item">
                         <div class="heat-header">
                             <span class="heat-topic">${Utils.escapeHtml(topic.title)}</span>
-                            <span class="heat-percentage">${percentage}%</span>
                         </div>
                         <div class="heat-bar"><div class="heat-fill" style="width: ${percentage}%;"></div></div>
-                        <div class="heat-stats">
-                            <span>${topic.stats.messageCount}条消息</span> · <span>${topic.stats.participantCount}人参与</span>
+                        <div class="heat-stats-row">
+                            <div class="heat-stats">
+                                <span>${topic.stats.messageCount}条消息</span>
+                                <span>${topic.stats.participantCount}人参与</span>
+                            </div>
+                            <span class="heat-percentage">${percentage}%</span>
                         </div>
                     </div>
                 `;
