@@ -488,9 +488,6 @@ h4 {
 }
 
 .heat-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
     margin-bottom: var(--spacing-xs);
 }
 
@@ -498,12 +495,8 @@ h4 {
     font-size: 15px;
     font-weight: 600;
     color: var(--color-text-primary);
-}
-
-.heat-percentage {
-    font-size: 15px;
-    font-weight: 600;
-    color: var(--color-accent);
+    word-break: break-word;
+    margin-bottom: 8px;
 }
 
 .heat-bar {
@@ -511,6 +504,8 @@ h4 {
     background: var(--color-separator);
     border-radius: 4px;
     overflow: hidden;
+    width: 100%;
+    margin-bottom: 8px;
 }
 
 .heat-fill {
@@ -520,10 +515,33 @@ h4 {
     transition: width 1s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+.heat-stats-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+}
+
 .heat-stats {
-    margin-top: var(--spacing-xs);
+    display: flex;
+    gap: 12px;
     font-size: 13px;
     color: var(--color-text-tertiary);
+    flex: 1;
+    flex-wrap: wrap;
+}
+
+.heat-stats span {
+    white-space: nowrap;
+}
+
+.heat-percentage {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--color-accent);
+    white-space: nowrap;
+    flex-shrink: 0;
+    margin-left: auto;
 }
 
 /* Participants Ranking */
@@ -927,21 +945,37 @@ footer {
         word-break: keep-all;
     }
 
-    /* 热度分布 */
-    .heat-header {
-        flex-wrap: nowrap;
-        gap: var(--spacing-xs);
+    /* 热度分布移动端优化 */
+    .heat-item {
+        margin: 16px 0;
     }
 
     .heat-topic {
-        flex: 1;
+        font-size: 14px;
+        margin-bottom: 6px;
+    }
+
+    .heat-bar {
+        margin-bottom: 6px;
+    }
+
+    .heat-stats-row {
+        gap: 8px;
+        flex-wrap: nowrap;
+        align-items: center;
+    }
+
+    .heat-stats {
+        font-size: 12px;
+        gap: 8px;
         min-width: 0;
-        word-break: break-word;
+        flex: 1;
+        overflow: hidden;
     }
 
     .heat-percentage {
+        font-size: 15px;
         flex-shrink: 0;
-        margin-left: auto;
     }
 
     /* 参与者统计 */
@@ -973,7 +1007,6 @@ footer {
     }
 
     /* Flex容器内的数字元素 */
-    .heat-header > *,
     .participant-stats > *,
     .owl-stats > *,
     .topic-card-header .topic-heat {
@@ -1728,6 +1761,20 @@ html {
     .history-btn svg {
         width: 20px;
         height: 20px;
+    }
+
+    /* 热度分布超小屏优化 */
+    .heat-stats-row {
+        gap: 6px;
+    }
+
+    .heat-stats {
+        font-size: 11px;
+        gap: 6px;
+    }
+
+    .heat-percentage {
+        font-size: 14px;
     }
 }
 
