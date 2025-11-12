@@ -1992,11 +1992,18 @@ html {
     gap: 16px;
     cursor: pointer;
     transition: background 0.2s ease;
+    position: relative;
+    z-index: 1;
 }
 
 .stock-row:hover {
     background: rgba(102, 126, 234, 0.05);
     border-radius: var(--radius-sm);
+}
+
+/* 确保展开时箭头始终可见 */
+.stock-item.expanded .stock-row {
+    z-index: 5;
 }
 
 /* 股票基础信息 */
@@ -2122,35 +2129,6 @@ html {
     color: var(--color-text-secondary);
 }
 
-/* 展开图标 */
-.expand-icon {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 24px;
-    height: 24px;
-    flex-shrink: 0;
-    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.expand-icon svg {
-    width: 18px;
-    height: 18px;
-    color: var(--color-text-tertiary);
-}
-
-.stock-item.expanded .expand-icon {
-    transform: rotate(180deg);
-}
-
-.expand-icon svg {
-    transition: color 0.2s ease;
-}
-
-.stock-row:hover .expand-icon svg {
-    color: var(--color-primary);
-}
-
 /* 股票详情 - 默认隐藏，点击展开 */
 .stock-detail {
     max-height: 0;
@@ -2158,6 +2136,8 @@ html {
     overflow: hidden;
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     margin-top: 0;
+    position: relative;
+    z-index: 0;  /* 确保detail在箭头下层 */
 }
 
 .stock-item.expanded .stock-detail {
@@ -2489,5 +2469,128 @@ html {
 
     .stock-sidebar {
         max-height: 80vh;
+    }
+}
+
+/* ============================================
+   风险提示样式
+   ============================================ */
+
+.risk-disclaimer {
+    margin: 48px auto 32px;
+    max-width: var(--container-max-width);
+    background: linear-gradient(135deg, rgba(239, 68, 68, 0.05), rgba(245, 158, 11, 0.05));
+    border: 2px solid var(--color-warning);
+    border-radius: var(--radius-lg);
+    padding: 24px 32px;
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+    box-shadow: 0 4px 16px rgba(245, 158, 11, 0.15);
+    transition: all 0.3s ease;
+}
+
+.risk-disclaimer:hover {
+    box-shadow: 0 8px 24px rgba(245, 158, 11, 0.25);
+    transform: translateY(-2px);
+}
+
+.disclaimer-icon {
+    font-size: 36px;
+    flex-shrink: 0;
+    line-height: 1;
+    animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+}
+
+.disclaimer-content {
+    flex: 1;
+}
+
+.disclaimer-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--color-warning);
+    margin: 0 0 16px 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.disclaimer-text {
+    font-size: 14px;
+    line-height: 1.8;
+    color: var(--color-text-secondary);
+    margin: 0 0 12px 0;
+}
+
+.disclaimer-text:last-of-type {
+    margin-bottom: 16px;
+}
+
+.disclaimer-text strong {
+    color: var(--color-text-primary);
+    font-weight: 700;
+}
+
+.disclaimer-highlight {
+    font-size: 16px;
+    color: var(--color-error);
+    font-weight: 700;
+    margin: 0;
+    text-align: center;
+    padding: 12px 0 0;
+    border-top: 1px solid rgba(245, 158, 11, 0.2);
+}
+
+/* 暗色主题适配 */
+[data-theme="dark"] .risk-disclaimer {
+    background: linear-gradient(135deg, rgba(239, 68, 68, 0.08), rgba(245, 158, 11, 0.08));
+    border-color: var(--color-warning);
+}
+
+[data-theme="dark"] .disclaimer-text {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+[data-theme="dark"] .disclaimer-text strong {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+/* 移动端适配 */
+@media (max-width: 734px) {
+    .risk-disclaimer {
+        margin: 32px 16px 24px;
+        padding: 20px;
+        flex-direction: column;
+        gap: 16px;
+        align-items: center;
+        text-align: center;
+    }
+
+    .disclaimer-icon {
+        font-size: 32px;
+    }
+
+    .disclaimer-title {
+        font-size: 16px;
+        justify-content: center;
+    }
+
+    .disclaimer-text {
+        font-size: 13px;
+        line-height: 1.6;
+    }
+
+    .disclaimer-highlight {
+        font-size: 15px;
     }
 }
