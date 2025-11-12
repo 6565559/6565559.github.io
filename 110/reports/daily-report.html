@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>群聊日报 by ChatInsight</title>
-     <!-- Favicon -->
+
+    <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%234f46e5'/%3E%3Cstop offset='100%25' stop-color='%2306b6d4'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='14' fill='url(%23g)'/%3E%3Cpath d='M16 20h32a6 6 0 016 6v10a6 6 0 01-6 6H28l-8 8v-8h-4a6 6 0 01-6-6V26a6 6 0 016-6z' fill='%23ffffff' opacity='0.92'/%3E%3Ccircle cx='24' cy='32' r='3' fill='%234f46e5'/%3E%3Ccircle cx='32' cy='32' r='3' fill='%234f46e5'/%3E%3Ccircle cx='40' cy='32' r='3' fill='%234f46e5'/%3E%3C/svg%3E">
     <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%234f46e5'/%3E%3Cstop offset='100%25' stop-color='%2306b6d4'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='14' fill='url(%23g)'/%3E%3Cpath d='M16 20h32a6 6 0 016 6v10a6 6 0 01-6 6H28l-8 8v-8h-4a6 6 0 01-6-6V26a6 6 0 016-6z' fill='%23ffffff' opacity='0.92'/%3E%3Ccircle cx='24' cy='32' r='3' fill='%234f46e5'/%3E%3Ccircle cx='32' cy='32' r='3' fill='%234f46e5'/%3E%3Ccircle cx='40' cy='32' r='3' fill='%234f46e5'/%3E%3C/svg%3E">
 
@@ -14,7 +15,7 @@
      <!-- <link rel="stylesheet" href="style.css">
     <script src="script.js"></script> -->
 
-    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/6565559/6565559.github.io@main/static/style-v1.5.css">
 
      <!-- 词云库：专业的词云布局算法 -->
     <script src="https://cdn.jsdelivr.net/npm/wordcloud@1.2.2/src/wordcloud2.js"></script>
@@ -22,8 +23,8 @@
     <!-- Supabase 客户端库 -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/6565559/6565559.github.io@main/static/style-v1.3.css"> 
-    <script src="https://cdn.jsdelivr.net/gh/6565559/6565559.github.io@main/static/script-v1.4.js"></script>
+     
+    <script src="https://cdn.jsdelivr.net/gh/6565559/6565559.github.io@main/static/script-v1.6.js"></script> 
 
 </head>
 <body>
@@ -38,6 +39,18 @@
         </div>
     </div>
 
+    <!-- 热门股票按钮 -->
+    <div class="stock-toggle-wrapper">
+        <button class="stock-btn" id="stock-btn" aria-label="查看热门股票">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="12" y1="20" x2="12" y2="10"/>
+                <line x1="18" y1="20" x2="18" y2="4"/>
+                <line x1="6" y1="20" x2="6" y2="16"/>
+            </svg>
+            <span>股票</span>
+        </button>
+    </div>
+
     <!-- 历史日报按钮 -->
     <div class="history-toggle-wrapper">
         <button class="history-btn" id="history-btn" aria-label="查看历史日报">
@@ -47,6 +60,17 @@
             </svg>
             <span>历史</span>
         </button>
+    </div>
+
+    <!-- 热门股票侧边栏 -->
+    <div class="stock-sidebar" id="stock-sidebar">
+        <div class="stock-header">
+            <h3>📈 热门股票</h3>
+            <button class="close-btn" id="close-stock-btn" aria-label="关闭">×</button>
+        </div>
+        <div class="stock-list" id="stock-list">
+            <!-- 动态生成股票列表 -->
+        </div>
     </div>
 
     <!-- 历史日报侧边栏 -->
@@ -143,6 +167,26 @@
         <footer id="report-footer">
             <!-- JS动态生成 -->
         </footer>
+
+        <!-- 风险提示 -->
+        <div class="risk-disclaimer">
+            <div class="disclaimer-icon">⚠️</div>
+            <div class="disclaimer-content">
+                <h3 class="disclaimer-title">投资风险提示</h3>
+                <p class="disclaimer-text">
+                    股票信息内容由 <strong>TradingAgents-CN 多智能体股票分析工具</strong>生成，本工具不具备证券投资咨询资质。
+                    网页中的所有分析结果、评分、投资建议均由 AI 基于历史数据自动生成，仅供<strong>学习、研究与技术交流</strong>使用，
+                    不构成任何投资建议或决策依据。
+                </p>
+                <p class="disclaimer-text">
+                    股票投资存在<strong>市场风险、流动性风险、政策风险</strong>等多种风险，可能导致本金损失。
+                    用户应基于自身风险承受能力独立决策，使用本工具产生的任何投资行为及其后果由用户自行承担。
+                </p>
+                <p class="disclaimer-highlight">
+                    <strong>市场有风险，投资需谨慎。</strong>
+                </p>
+            </div>
+        </div>
     </div>
 
     <script>
@@ -197,6 +241,24 @@
                     <div class="card" id="report-summary-container"></div>
                 </section>
                 <footer id="report-footer"></footer>
+                <div class="risk-disclaimer">
+                    <div class="disclaimer-icon">⚠️</div>
+                    <div class="disclaimer-content">
+                        <h3 class="disclaimer-title">投资风险提示</h3>
+                        <p class="disclaimer-text">
+                            股票信息内容由 <strong>TradingAgents-CN 多智能体股票分析工具</strong>生成，本工具不具备证券投资咨询资质。
+                            网页中的所有分析结果、评分、投资建议均由 AI 基于历史数据自动生成，仅供<strong>学习、研究与技术交流</strong>使用，
+                            不构成任何投资建议或决策依据。
+                        </p>
+                        <p class="disclaimer-text">
+                            股票投资存在<strong>市场风险、流动性风险、政策风险</strong>等多种风险，可能导致本金损失。
+                            用户应基于自身风险承受能力独立决策，使用本工具产生的任何投资行为及其后果由用户自行承担。
+                        </p>
+                        <p class="disclaimer-highlight">
+                            <strong>市场有风险，投资需谨慎。</strong>
+                        </p>
+                    </div>
+                </div>
             `;
         },
 
@@ -310,6 +372,164 @@
     const historySidebar = new SidebarManager('history-sidebar', 'overlay', 'history-list');
 
     /**
+     * 股票侧边栏管理器
+     */
+    class StockSidebarManager {
+        constructor(sidebarId, overlayId, listId) {
+            this.sidebar = document.getElementById(sidebarId);
+            this.overlay = document.getElementById(overlayId);
+            this.list = document.getElementById(listId);
+            this.stockData = [];
+        }
+
+        /**
+         * 显示侧边栏并加载数据
+         */
+        async show() {
+            // 从当前报告数据中获取日期
+            let targetDate = null;
+            if (currentReportData && currentReportData._dbFields) {
+                targetDate = currentReportData._dbFields.reportDate;
+            }
+
+            if (!targetDate) {
+                console.warn('⚠️ 未找到当前日报日期，无法加载股票数据');
+                this.stockData = [];
+            } else {
+                // 获取指定日期的股票数据并渲染
+                this.stockData = await fetchStockAnalysis(targetDate);
+            }
+
+            this.renderList();
+
+            this.sidebar.classList.add('active');
+            this.overlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        /**
+         * 关闭侧边栏
+         */
+        close() {
+            this.sidebar.classList.remove('active');
+            this.overlay.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        /**
+         * 渲染股票列表
+         */
+        renderList() {
+            if (!this.stockData || this.stockData.length === 0) {
+                this.list.innerHTML = '<div class="empty-state">暂无股票数据</div>';
+                return;
+            }
+
+            const listHTML = this.stockData.map((stock, index) => {
+                const decision = stock.decision || {};
+
+                // 根据 action 确定 CSS 类名
+                let actionClass = 'hold';
+                if (decision.action === '买入') actionClass = 'buy';
+                else if (decision.action === '卖出') actionClass = 'sell';
+
+                // 最新价
+                const closePrice = stock.close !== undefined ? stock.close.toFixed(2) : '-';
+
+                // 涨跌幅，带颜色标识
+                let pctChg = '-';
+                let pctChgClass = 'neutral';
+                if (stock.pct_chg !== undefined) {
+                    const value = parseFloat(stock.pct_chg);
+                    pctChg = (value > 0 ? '+' : '') + value.toFixed(2) + '%';
+                    pctChgClass = value > 0 ? 'up' : (value < 0 ? 'down' : 'neutral');
+                }
+
+                // 风险指数
+                let riskLevel = '-';
+                let riskClass = 'medium';
+                if (decision.risk_score !== undefined) {
+                    const riskValue = parseFloat(decision.risk_score);
+                    if (riskValue < 0.3) {
+                        riskLevel = '低风险';
+                        riskClass = 'low';
+                    } else if (riskValue <= 0.7) {
+                        riskLevel = '中风险';
+                        riskClass = 'medium';
+                    } else {
+                        riskLevel = '高风险';
+                        riskClass = 'high';
+                    }
+                }
+
+                // 置信度 - 转换为百分比
+                const confidence = decision.confidence !== undefined
+                    ? Math.round(parseFloat(decision.confidence) * 100)
+                    : 0;
+
+                // 决策依据
+                const reasoning = decision.reasoning || '暂无分析';
+
+                return `
+                    <div class="stock-item" data-stock-id="${stock.id || index}">
+                        <div class="stock-row" onclick="toggleStockDetail(event)">
+                            <div class="stock-info">
+                                <span class="stock-index">${index + 1}</span>
+                                <div class="stock-name-group">
+                                    <span class="stock-name">${stock.stock_name || '未知'}</span>
+                                    <span class="stock-code">${stock.stock_code || '-'}</span>
+                                </div>
+                            </div>
+
+                            <div class="stock-data">
+                                <div class="data-group">
+                                    <span class="data-label">最新价</span>
+                                    <span class="data-value price">¥${closePrice}</span>
+                                </div>
+
+                                <div class="data-group">
+                                    <span class="data-label">涨跌幅</span>
+                                    <span class="data-value pct-chg ${pctChgClass}">${pctChg}</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="stock-detail">
+                            <div class="detail-metrics">
+                                <div class="detail-item">
+                                    <span class="detail-label">投资建议</span>
+                                    <span class="detail-value action action-${actionClass}">${decision.action || '-'}</span>
+                                </div>
+                                <div class="detail-item">
+                                    <span class="detail-label">目标价</span>
+                                    <span class="detail-value target-price">¥${decision.target_price || '-'}</span>
+                                </div>
+                                <div class="detail-item">
+                                    <span class="detail-label">风险指数</span>
+                                    <span class="detail-value risk risk-${riskClass}">${riskLevel}</span>
+                                </div>
+                                <div class="detail-item">
+                                    <span class="detail-label">置信度</span>
+                                    <span class="detail-value confidence">${confidence}%</span>
+                                </div>
+                            </div>
+                            <div class="detail-reasoning">
+                                <div class="reasoning-label">💡 决策依据</div>
+                                <div class="reasoning-content">${reasoning}</div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            this.list.innerHTML = listHTML;
+        }
+    }
+
+    // 创建股票侧边栏管理器实例
+    const stockSidebar = new StockSidebarManager('stock-sidebar', 'overlay', 'stock-list');
+
+    /**
      * 数据映射器 - 统一处理数据库字段映射
      */
     const DataMapper = {
@@ -338,8 +558,9 @@
         }
     };
 
-    // 全局变量：存储当前显示的日报ID
+    // 全局变量：存储当前显示的日报ID和数据
     let currentReportId = null;
+    let currentReportData = null;
     let historyReports = [];
 
     /**
@@ -372,6 +593,9 @@
 
             // 从数据库记录中提取 report_data JSON 字段，并附加数据库字段
             const reportData = DataMapper.extractReportData(data);
+
+            // 保存当前报告数据到全局变量
+            currentReportData = reportData;
 
             return reportData;
 
@@ -410,6 +634,57 @@
     }
 
     /**
+     * 从 Supabase 获取指定日期的热门股票数据
+     * @param {string} targetDate - 目标日期 (YYYY-MM-DD 格式)
+     * @returns {Promise<Array>} 股票分析数组
+     */
+    async function fetchStockAnalysis(targetDate) {
+        try {
+            console.log('📡 开始获取股票分析数据...', '目标日期:', targetDate);
+
+            // 调用 Supabase RPC 函数获取热门股票及其分析数据
+            const { data, error } = await supabase.rpc('get_hot_stocks_with_reports', {
+                query_date: targetDate,
+                query_type: 'DAY'
+            });
+
+            if (error) {
+                throw error;
+            }
+
+            if (!data || data.length === 0) {
+                console.log('ℹ️ 该日期没有热门股票数据');
+                return [];
+            }
+
+            // 将函数返回的数据转换为前端需要的格式
+            const stockData = data.map(item => ({
+                // 从 analysis_reports 表的字段
+                id: item.report_id,
+                created_at: item.report_created_at,
+                stock_code: item.stock_code,
+                stock_name: item.stock_name,
+                decision: item.decision,
+                analysin_date: item.analysis_date,
+
+                // 从 stock_hot_day 表附加的字段
+                hot: item.hot,
+                date_point: item.date_point,
+                date_type: item.date_type,
+                close: item.close,          // 收盘价
+                pct_chg: item.pct_chg       // 涨跌幅
+            }));
+
+            console.log('✅ 成功获取股票分析数据:', stockData.length, '条');
+            return stockData;
+
+        } catch (error) {
+            console.error('❌ 获取股票数据失败:', error);
+            return [];
+        }
+    }
+
+    /**
      * 根据ID加载特定日报
      * @param {number} reportId - 日报ID
      */
@@ -426,6 +701,9 @@
 
             // 附加数据库字段到报告数据
             const reportData = DataMapper.extractReportData(report);
+
+            // 保存当前报告数据到全局变量
+            currentReportData = reportData;
 
             // 重新构建容器结构
             const container = document.querySelector('.container');
@@ -740,15 +1018,57 @@
         // 绑定事件
         const historyBtn = document.getElementById('history-btn');
         const closeBtn = document.getElementById('close-history-btn');
-        const overlay = document.getElementById('overlay');
 
         historyBtn.addEventListener('click', showHistorySidebar);
         closeBtn.addEventListener('click', closeHistorySidebar);
-        overlay.addEventListener('click', closeHistorySidebar);
+    }
 
-        // ESC键关闭侧边栏
+    /**
+     * 切换股票详情展开/收起
+     * @param {Event} event - 点击事件
+     */
+    function toggleStockDetail(event) {
+        // 查找最近的 stock-item 元素
+        const stockItem = event.currentTarget.closest('.stock-item');
+        if (!stockItem) return;
+
+        // 切换展开状态
+        stockItem.classList.toggle('expanded');
+
+        // 阻止事件冒泡
+        event.stopPropagation();
+    }
+
+    // 将函数暴露到全局作用域
+    window.toggleStockDetail = toggleStockDetail;
+
+    /**
+     * 初始化股票功能
+     */
+    function initStockFeature() {
+        const stockBtn = document.getElementById('stock-btn');
+        const closeBtn = document.getElementById('close-stock-btn');
+
+        stockBtn.addEventListener('click', () => stockSidebar.show());
+        closeBtn.addEventListener('click', () => stockSidebar.close());
+    }
+
+    /**
+     * 初始化遮罩层和全局键盘事件
+     */
+    function initGlobalEvents() {
+        const overlay = document.getElementById('overlay');
+
+        // 遮罩层点击关闭所有侧边栏
+        overlay.addEventListener('click', () => {
+            stockSidebar.close();
+            historySidebar.close();
+        });
+
+        // ESC键关闭所有侧边栏
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape') {
+                stockSidebar.close();
                 historySidebar.close();
             }
         });
@@ -786,6 +1106,12 @@
             // 初始化历史日报功能
             await initHistoryFeature();
 
+            // 初始化股票功能
+            initStockFeature();
+
+            // 初始化全局事件
+            initGlobalEvents();
+
         } catch (error) {
             console.error('❌ 初始化失败:', error);
             showError(error.message || '未知错误，请查看控制台获取详细信息');
@@ -804,6 +1130,7 @@
         let scrollTimer = null;
         const themeToggle = document.querySelector('.theme-toggle-wrapper');
         const historyToggle = document.querySelector('.history-toggle-wrapper');
+        const stockToggle = document.querySelector('.stock-toggle-wrapper');
 
         window.addEventListener('scroll', function() {
             // 清除之前的定时器
@@ -819,10 +1146,12 @@
                     // 向下滚动且超过100px，隐藏按钮
                     themeToggle.classList.add('hidden');
                     historyToggle.classList.add('hidden');
+                    stockToggle.classList.add('hidden');
                 } else if (scrollTop < lastScrollTop) {
                     // 向上滚动，显示按钮
                     themeToggle.classList.remove('hidden');
                     historyToggle.classList.remove('hidden');
+                    stockToggle.classList.remove('hidden');
                 }
 
                 lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
