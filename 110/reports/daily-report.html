@@ -15,7 +15,7 @@
      <!-- <link rel="stylesheet" href="style.css">
     <script src="script.js"></script> -->
 
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/6565559/6565559.github.io@main/static/style-v1.5.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/6565559/6565559.github.io@main/static/style-v1.6.css">
 
      <!-- 词云库：专业的词云布局算法 -->
     <script src="https://cdn.jsdelivr.net/npm/wordcloud@1.2.2/src/wordcloud2.js"></script>
@@ -24,7 +24,7 @@
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
      
-    <script src="https://cdn.jsdelivr.net/gh/6565559/6565559.github.io@main/static/script-v1.6.js"></script> 
+    <script src="https://cdn.jsdelivr.net/gh/6565559/6565559.github.io@main/static/script-v1.7.js"></script> 
 
 </head>
 <body>
@@ -196,6 +196,10 @@
 
     // 初始化 Supabase 客户端
     const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+    // 股票数据缓存
+    let cachedStockData = null;
+    let cachedStockDate = null;
 
     /**
      * HTML模板工厂 - 统一管理所有HTML模板
@@ -386,7 +390,12 @@
          * 显示侧边栏并加载数据
          */
         async show() {
-            // 从当前报告数据中获取日期
+            // 1. 先打开侧栏
+            this.sidebar.classList.add('active');
+            this.overlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+
+            // 2. 从当前报告数据中获取日期
             let targetDate = null;
             if (currentReportData && currentReportData._dbFields) {
                 targetDate = currentReportData._dbFields.reportDate;
@@ -395,16 +404,46 @@
             if (!targetDate) {
                 console.warn('⚠️ 未找到当前日报日期，无法加载股票数据');
                 this.stockData = [];
-            } else {
-                // 获取指定日期的股票数据并渲染
-                this.stockData = await fetchStockAnalysis(targetDate);
+                this.renderList();
+                return;
             }
 
-            this.renderList();
+            // 3. 检查是否有缓存数据
+            if (cachedStockDate === targetDate && cachedStockData) {
+                console.log('⚡ 使用缓存的股票数据,即时显示');
+                this.stockData = cachedStockData;
+                this.renderList();
+                return;
+            }
 
-            this.sidebar.classList.add('active');
-            this.overlay.classList.add('active');
-            document.body.style.overflow = 'hidden';
+            // 4. 无缓存时显示加载动画
+            this.showLoading();
+
+            // 5. 加载数据
+            this.stockData = await fetchStockAnalysis(targetDate);
+
+            // 6. 更新缓存
+            cachedStockData = this.stockData;
+            cachedStockDate = targetDate;
+
+            // 7. 渲染列表
+            this.renderList();
+        }
+
+        /**
+         * 显示加载动画
+         */
+        showLoading() {
+            this.list.innerHTML = `
+                <div class="stock-loading">
+                    <div class="loading-spinner">
+                        <div class="spinner-ring"></div>
+                        <div class="spinner-ring"></div>
+                        <div class="spinner-ring"></div>
+                    </div>
+                    <p class="loading-text">正在加载股票数据...</p>
+                </div>
+            `;
         }
 
         /**
@@ -433,42 +472,83 @@
                 if (decision.action === '买入') actionClass = 'buy';
                 else if (decision.action === '卖出') actionClass = 'sell';
 
-                // 最新价
-                const closePrice = stock.close !== undefined ? stock.close.toFixed(2) : '-';
-
-                // 涨跌幅，带颜色标识
-                let pctChg = '-';
-                let pctChgClass = 'neutral';
-                if (stock.pct_chg !== undefined) {
-                    const value = parseFloat(stock.pct_chg);
-                    pctChg = (value > 0 ? '+' : '') + value.toFixed(2) + '%';
-                    pctChgClass = value > 0 ? 'up' : (value < 0 ? 'down' : 'neutral');
+                // 最新价 - 空值处理
+                let closePrice = '-';
+                if (stock.close !== undefined && stock.close !== null && stock.close !== '') {
+                    const priceValue = parseFloat(stock.close);
+                    closePrice = !isNaN(priceValue) ? priceValue.toFixed(2) : '-';
                 }
 
-                // 风险指数
-                let riskLevel = '-';
-                let riskClass = 'medium';
-                if (decision.risk_score !== undefined) {
-                    const riskValue = parseFloat(decision.risk_score);
-                    if (riskValue < 0.3) {
-                        riskLevel = '低风险';
-                        riskClass = 'low';
-                    } else if (riskValue <= 0.7) {
-                        riskLevel = '中风险';
-                        riskClass = 'medium';
-                    } else {
-                        riskLevel = '高风险';
-                        riskClass = 'high';
+                // 涨跌幅 - 空值处理，带颜色标识
+                let pctChg = '-';
+                let pctChgClass = 'neutral';
+                if (stock.pct_chg !== undefined && stock.pct_chg !== null && stock.pct_chg !== '') {
+                    const value = parseFloat(stock.pct_chg);
+                    if (!isNaN(value)) {
+                        pctChg = (value > 0 ? '+' : '') + value.toFixed(2) + '%';
+                        pctChgClass = value > 0 ? 'up' : (value < 0 ? 'down' : 'neutral');
                     }
                 }
 
-                // 置信度 - 转换为百分比
-                const confidence = decision.confidence !== undefined
-                    ? Math.round(parseFloat(decision.confidence) * 100)
-                    : 0;
+                // 风险指数 - 空值处理
+                let riskLevel = '-';
+                let riskClass = 'medium';
+                if (decision.risk_score !== undefined && decision.risk_score !== null && decision.risk_score !== '') {
+                    const riskValue = parseFloat(decision.risk_score);
+                    if (!isNaN(riskValue)) {
+                        if (riskValue < 0.3) {
+                            riskLevel = '低风险';
+                            riskClass = 'low';
+                        } else if (riskValue <= 0.7) {
+                            riskLevel = '中风险';
+                            riskClass = 'medium';
+                        } else {
+                            riskLevel = '高风险';
+                            riskClass = 'high';
+                        }
+                    }
+                }
+
+                // 置信度 - 空值处理，转换为百分比
+                let confidence = '-';
+                if (decision.confidence !== undefined && decision.confidence !== null && decision.confidence !== '') {
+                    const confValue = parseFloat(decision.confidence);
+                    if (!isNaN(confValue)) {
+                        confidence = Math.round(confValue * 100) + '%';
+                    }
+                }
+
+                // 目标价 - 空值处理
+                let targetPrice = '-';
+                if (decision.target_price !== undefined && decision.target_price !== null && decision.target_price !== '') {
+                    const priceValue = parseFloat(decision.target_price);
+                    if (!isNaN(priceValue)) {
+                        targetPrice = priceValue.toFixed(2);
+                    }
+                }
+
+                // 投资建议 - 空值处理
+                const actionText = decision.action && decision.action.trim() !== '' ? decision.action : '-';
 
                 // 决策依据
-                const reasoning = decision.reasoning || '暂无分析';
+                const reasoning = decision.reasoning && decision.reasoning.trim() !== '' ? decision.reasoning : '暂无分析';
+
+                // 市场类型 - 显示标签
+                let marketLabel = '';
+                let marketClass = '';
+                if (stock.market_type) {
+                    const marketType = stock.market_type.trim();
+                    if (marketType === 'A股' || marketType === 'A') {
+                        marketLabel = 'A股';
+                        marketClass = 'market-a';
+                    } else if (marketType === '港股' || marketType === 'HK' || marketType === 'H') {
+                        marketLabel = '港股';
+                        marketClass = 'market-hk';
+                    } else {
+                        marketLabel = marketType;
+                        marketClass = 'market-other';
+                    }
+                }
 
                 return `
                     <div class="stock-item" data-stock-id="${stock.id || index}">
@@ -477,14 +557,17 @@
                                 <span class="stock-index">${index + 1}</span>
                                 <div class="stock-name-group">
                                     <span class="stock-name">${stock.stock_name || '未知'}</span>
-                                    <span class="stock-code">${stock.stock_code || '-'}</span>
+                                    <div class="stock-code-row">
+                                        ${marketLabel ? `<span class="market-tag ${marketClass}">${marketLabel}</span>` : ''}
+                                        <span class="stock-code">${stock.stock_code || '-'}</span>
+                                    </div>
                                 </div>
                             </div>
 
                             <div class="stock-data">
                                 <div class="data-group">
                                     <span class="data-label">最新价</span>
-                                    <span class="data-value price">¥${closePrice}</span>
+                                    <span class="data-value price">${closePrice === '-' ? '-' : '¥' + closePrice}</span>
                                 </div>
 
                                 <div class="data-group">
@@ -498,11 +581,11 @@
                             <div class="detail-metrics">
                                 <div class="detail-item">
                                     <span class="detail-label">投资建议</span>
-                                    <span class="detail-value action action-${actionClass}">${decision.action || '-'}</span>
+                                    <span class="detail-value action action-${actionClass}">${actionText}</span>
                                 </div>
                                 <div class="detail-item">
                                     <span class="detail-label">目标价</span>
-                                    <span class="detail-value target-price">¥${decision.target_price || '-'}</span>
+                                    <span class="detail-value target-price">${targetPrice === '-' ? '-' : '¥' + targetPrice}</span>
                                 </div>
                                 <div class="detail-item">
                                     <span class="detail-label">风险指数</span>
@@ -510,7 +593,7 @@
                                 </div>
                                 <div class="detail-item">
                                     <span class="detail-label">置信度</span>
-                                    <span class="detail-value confidence">${confidence}%</span>
+                                    <span class="detail-value confidence">${confidence}</span>
                                 </div>
                             </div>
                             <div class="detail-reasoning">
@@ -672,7 +755,8 @@
                 date_point: item.date_point,
                 date_type: item.date_type,
                 close: item.close,          // 收盘价
-                pct_chg: item.pct_chg       // 涨跌幅
+                pct_chg: item.pct_chg,      // 涨跌幅
+                market_type: item.market_type  // 市场类型 (A股/港股)
             }));
 
             console.log('✅ 成功获取股票分析数据:', stockData.length, '条');
@@ -717,9 +801,40 @@
 
             console.log('🎉 日报切换完成！');
 
+            // 预加载股票数据(不阻塞页面渲染)
+            preloadStockData(reportData._dbFields.reportDate);
+
         } catch (error) {
             console.error('❌ 加载日报失败:', error);
             showError(error.message || '加载日报失败');
+        }
+    }
+
+    /**
+     * 预加载股票数据到缓存
+     * @param {string} targetDate - 目标日期
+     */
+    async function preloadStockData(targetDate) {
+        try {
+            console.log('📦 开始预加载股票数据...', targetDate);
+
+            // 如果已经有相同日期的缓存,跳过
+            if (cachedStockDate === targetDate && cachedStockData) {
+                console.log('✅ 使用已缓存的股票数据');
+                return;
+            }
+
+            // 后台加载股票数据
+            const stockData = await fetchStockAnalysis(targetDate);
+
+            // 更新缓存
+            cachedStockData = stockData;
+            cachedStockDate = targetDate;
+
+            console.log('✅ 股票数据预加载完成:', stockData.length, '条');
+        } catch (error) {
+            console.error('⚠️ 预加载股票数据失败:', error);
+            // 预加载失败不影响主流程
         }
     }
 
@@ -1102,6 +1217,11 @@
             ChatLogRenderer.init(reportData);
 
             console.log('🎉 日报渲染完成！');
+
+            // 预加载股票数据(不阻塞页面初始化)
+            if (reportData && reportData._dbFields && reportData._dbFields.reportDate) {
+                preloadStockData(reportData._dbFields.reportDate);
+            }
 
             // 初始化历史日报功能
             await initHistoryFeature();
